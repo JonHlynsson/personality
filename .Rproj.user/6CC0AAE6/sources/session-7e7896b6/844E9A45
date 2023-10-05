@@ -1,9 +1,9 @@
 {
     "id": "844E9A45",
-    "path": "~/Háskóli Íslands/Kennsla/Persónuleikasálfræði 2023/R og glærur/Personuleikakennsla 2023/personality/hlekkir-a-glaerur.Rmd",
-    "project_path": "hlekkir-a-glaerur.Rmd",
+    "path": "C:/Users/jonin/Dropbox/PC/Documents/Háskóli Íslands/Kennsla/Persónuleikasálfræði 2023/R og glærur/Personuleikakennsla 2023/personality/enskuslides.Rmd",
+    "project_path": "enskuslides.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "3066045374",
     "contents": "",
     "dirty": false,
     "created": 1696530699831.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "29,49",
-        "scrollLine": "0"
+        "cursorPosition": "17,13",
+        "scrollLine": "14"
     },
     "folds": "",
-    "lastKnownWriteTime": 1696530910,
+    "lastKnownWriteTime": 1696533359,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1696530910985,
+    "last_content_update": 1696533359843,
     "read_only": false,
     "read_only_alternatives": []
 }

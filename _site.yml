@@ -2,7 +2,7 @@ name: "SÁL320G Persónuleikasálfræði"
 icon: fa-empire
 navbar:
   title: "SÁL320G Persónuleikasálfræði"
-  icon: fa-font-awesome-flag
+  icon: fas fa-fingerprint
   left:
     - text: "Forsíða"
       href: index.html
@@ -13,18 +13,15 @@ navbar:
       - text: "Hlekkir og almennar upplýsingar"
         href: Rannsóknarverkefni.html
         icon: fa-link
-      - text: "Skrambi - Villuleit"
-        href: "https://skrambi.arnastofnun.is/"
-        icon: fa-clipboard-list
-      - text: "Persónuleikinn"
-        href: persónuleikatexti.html
-        icon: fas fa-fingerprint
       - text: "APA heimildaskráning"
         href: "https://bokasafn.ru.is/apa/heim"
         icon: fa-clipboard-list
       - text: "Flýtilykill APA heimildaskráningar"
         href: "https://www.ru.is/media/skjol---bokasafn/APA-flytilykill.pdf"
         icon: fa-clipboard-list
+      - text: "Lífeðlisfræðilegar undirstöður úthverfu og taugaveiklunnar"
+        href: enskuslides.html
+        icon: fa-file-text
     - text: "Glærur"
       href: hlekkir-a-glaerur.html
       icon: fa-film
