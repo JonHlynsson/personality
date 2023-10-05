@@ -1,24 +1,26 @@
 {
-    "id": "5048B8CB",
+    "id": "61E4FB57",
     "path": "~/Háskóli Íslands/Kennsla/Persónuleikasálfræði 2023/R og glærur/Personuleikakennsla 2023/personality/default.css",
     "project_path": "default.css",
     "type": "css",
-    "hash": "0",
+    "hash": "3884345318",
     "contents": "",
     "dirty": false,
-    "created": 1696532912880.0,
+    "created": 1696537421435.0,
     "source_on_save": false,
-    "relative_order": 7,
+    "relative_order": 3,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "13,20",
+        "scrollLine": "5"
     },
     "folds": "",
-    "lastKnownWriteTime": 1696524996,
+    "lastKnownWriteTime": 1696537921,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1696524996,
+    "last_content_update": 1696537921410,
     "read_only": false,
     "read_only_alternatives": []
 }

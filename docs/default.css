@@ -5,7 +5,14 @@
       --header-color: #1381B0;
       --text-bold-color: #9933FF
       --link-color: #000263;
+    --font-family: "https://fonts.googleapis.com/css2?family=Jost&display=swap"
+    --text-font-family: 'https://fonts.googleapis.com/css2?family=Jost&display=swap'
+    --text_font_url = 'https://fonts.googleapis.com/css2?family=Jost&display=swap'
   }
+  
+* {
+  font-family: Jost, Sans-Serif !important;
+}
 
 html {
   font-size: var(--base-font-size);
