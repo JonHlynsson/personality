@@ -1,26 +1,26 @@
 {
-    "id": "844E9A45",
+    "id": "2C5EA30B",
     "path": "~/Háskóli Íslands/Kennsla/Persónuleikasálfræði 2023/R og glærur/Personuleikakennsla 2023/personality/enskuslides.Rmd",
     "project_path": "enskuslides.Rmd",
     "type": "r_markdown",
-    "hash": "3066045374",
+    "hash": "139957345",
     "contents": "",
     "dirty": false,
-    "created": 1696530699831.0,
+    "created": 1696538213202.0,
     "source_on_save": false,
     "relative_order": 5,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "17,13",
+        "cursorPosition": "18,107",
         "scrollLine": "14"
     },
     "folds": "",
-    "lastKnownWriteTime": 1696533359,
+    "lastKnownWriteTime": 1696538328,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1696533359843,
+    "last_content_update": 1696538328018,
     "read_only": false,
     "read_only_alternatives": []
 }

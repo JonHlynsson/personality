@@ -8,6 +8,8 @@ output:
       toc_float: yes
       toc-depth: 6
 date: "`r Sys.Date()`"
+bibliography: Heimildir.bib
+citation-style: APA7isl.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -29,4 +31,20 @@ Nemendafyrirlestur: Nemendur halda stuttan fyrirlestur þar sem þeir kynna megi
 knitr::include_app("https://drive.google.com/file/d/1E01Rf2za2B-VLixb0h15EryBMBhFq1gU/preview", 
                    height = 1000)
 ```
+
+
+## Hugarkort: [**Um ritun rannsóknarritgerða í sálfræði**](https://drive.google.com/file/d/1VkIamf51d3a3mNvP-gYsugPmSXxS6WCn/preview) 
+
+@UmRitunRannsoknarritgerda1997 skrifuðu frábæra grein um ritun rannsókarritgerða í sálfræði.
+
+```{r}
+knitr::include_app("https://drive.google.com/file/d/13O2oC3te9q-vu8BmOEO2h75lqPdKEdgz/preview", height = 750)
+```
+
+### Heimildir 
+  <div id="refs"></div>
+  
+  <hr>
+  `r r2symbols::symbol("copyright")` Jón Ingi Hlynsson - Síðasta breyting átti sér stað: `r Sys.Date()`
+
 
