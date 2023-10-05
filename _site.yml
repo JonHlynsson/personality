@@ -2,7 +2,7 @@ name: "SÁL320G Persónuleikasálfræði"
 icon: fa-empire
 navbar:
   title: "SÁL320G Persónuleikasálfræði"
-  icon: fas fa-fingerprint
+  icon: fa-empire
   left:
     - text: "Forsíða"
       href: index.html
@@ -12,7 +12,7 @@ navbar:
       menu:
       - text: "Verkefnalýsing"
         href: Rannsóknarverkefni.html
-        icon: fa-link
+        icon: fa-empire
       - text: "APA heimildaskráning"
         href: "https://bokasafn.ru.is/apa/heim"
         icon: fa-clipboard-list
@@ -21,10 +21,10 @@ navbar:
         icon: fa-clipboard-list
       - text: "Lífeðlisfræðilegar undirstöður úthverfu og taugaveiklunnar"
         href: enskuslides.html
-        icon: fa-file-text
+        icon: fa-link
       - text: "Leiðbeiningar fyrir Zotero"
         href: https://bokasafn.ru.is/zotero
-        icon: sort_by_alpha
+        icon: fa-school
     - text: "Glærur"
       href: hlekkir-a-glaerur.html
       icon: fa-film

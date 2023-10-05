@@ -1,0 +1,222 @@
+---
+title: "Skorun breyta og útreikningar"
+subtitle: ""  
+author: 
+  - "Jón Ingi Hlynsson"
+  - "Ísak Örn Ívarsson"
+date: '`r Sys.Date()`'
+institute: "Háskóli Íslands"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    self_contained: true
+    seal: false
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(kableExtra)
+knitr::opts_chunk$set(
+  cache = FALSE,
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#10099F",
+  secondary_color = "#0098AA",
+  inverse_header_color = "#FFFFFF",
+  inverse_background_color = "#10099F", 
+  colors = c(red = "#ff0019", black = "#000000"), inverse_text_color = "#FFFFFF", text_font_url = 'https://fonts.googleapis.com/css2?family=Jost&display=swap',  
+)
+
+library(xaringanExtra)
+use_tile_view()
+```
+
+class: center, middle
+background-image: url(images/HI_merki.png)
+background-size: 125px
+background-position: 5% 92%
+
+# Skorun breyta og útreikningar
+
+
+
+### Persónuleikasálfræði
+
+
+Jón Ingi Hlynsson  
+Ísak Örn Ívarsson
+
+
+#### Háskóli Íslands 
+
+#### Haustönn 2023
+
+---
+class: center middle inverse
+
+### Textasmíði er skipulögð hugsun
+
+
+Að vera fær í að skrifa eflir getu okkar til þess að hugsa
+
+
+---
+
+.pull-left[
+### Gagnleg grein um ritun inngangs
+```{r}
+knitr::include_app("https://drive.google.com/file/d/1g5yLYC-m7htLzLXQQt7k3suBTOUlqbHj/preview", height = 450)
+```
+]
+
+.pull-right[
+### Ritun akademískra textasmíða 
+```{r, out.width="70%", fig.align='center'}
+knitr::include_graphics("images/how-to-write-academic-papers.jpg")
+```
+]
+
+---
+
+# Dagskrá verkefnatíma
+
+```{r, out.width="70%", fig.align='center'}
+knitr::include_graphics("images/dagskra.png")
+```
+
+
+---
+
+.center[
+.middle[# **Persónuleikakvarðarnir**]
+]
+
+.pull-left[
+**EPQ-SS** ([Eysenck, Eysenk og Barrett, 1985](https://www.sciencedirect.com/science/article/abs/pii/0191886985900261)). Þetta próf inniheldur 48 atriði og er mæling á þriggja þátta líkani um persónuleika. Þættirnir nefnast **Taugaveiklun**, **Úthverfa**, **Harðlyndi** og einnig er kvarði er metur samkvæmi skala (e. *lie scale*). 
+
+**PANAS** ([Watson, Clark & Tellegen, 1988](https://sci-hub.wf/10.1037/0022-3514.54.6.1063)). Þetta próf inniheldur 20 atriði sem meta þættina **Jákvæðar** og **Neikvæðar** tilfinningar. Þessir þættir mátast vel á persónuleikaþættina **Úthverfa** og **Taugaveiklun**. Hvor þáttur er metinn með 10 atriðum. 
+
+**Týpa D** ([Denollet, 2005](https://journals.lww.com/psychosomaticmedicine/Fulltext/2005/01000/DS14__Standard_Assessment_of_Negative_Affectivity,.13.aspx?casa_token=OiWbMw1e9Y0AAAAA:h-ROJOqjkFTtUpURzXfCN6MriOhRnV6IudoQsU3nEAcdhsvsQibq9-_rXOd5L-sf-EjkCirW4TxBIjOwUqUjOpzZ)). Þetta próf er 14 atriði og meta þau þættina **neikvæðar tilfinningar** og **félagslega hömlun** (7 atriði per þátt). Skor ***beggja þátta*** er notað til að skilgreina Týpu D þar sem skor 10 eða hærra á báðum kvörðum er nauðsynlegt. 
+]
+
+.pull-right[
+**LOT-R** ([Scheier, Carver & Bridges, 1994](https://sci-hub.wf/10.1037/0022-3514.67.6.1063)). Þetta próf inniheldur 6 atriði og metur **bjartsýni** og **svartsýni** (þrjú atriði per þátt). Prófið er bæði skorað fyrir öll sex atriði þar sem hátt skor telst bjartsýni en lágt svartsýni, en einnig er hægt að skora hvorn þátt fyrir sig.  
+
+**HEXACO-60 atriða listinn** ([Lee og Ashton, 2004](https://www.tandfonline.com/doi/epdf/10.1207/s15327906mbr3902_8?needAccess=true)). Prófið metur sex persónuleikaþætti skv. HEXACO módelinu. Þeir eru, **heiðarleiki-auðmýkt** (e. *honesty-humility*), **tilfinningasemi** (e. *emotionality*), **úthverfa**, **samvinnuþýði**, **samviskusemi** og **víðsýni**.
+]
+
+
+---
+
+.pull-left[# Fylgibreytur
+
+- DASS
+- Perceived Stress Scale
+- Coping Styles Inventory for stressful situations
+- Spurningalisti um áhyggjur
+- WHO-5 Well-being index
+- Sjálfmyndarkvarði Rosenberg
+- Svefnleysiskvarði
+- Spurningar um reykingar og áfengisneyslu
+- Heilsufarslisti – sállíkamleg einkenni
+- Hvatvísi
+- Lífsánægjukvarðinn
+- Quality of Life Scale
+- Húmorstílar
+- Tilfinningastjórnun
+]
+
+.pull-right[
+# Aukaspurningar
+
+```{r}
+knitr::include_graphics("images/aukaspurningar.png")
+```
+
+
+]
+
+---
+
+### Uppsetning á gagnasafni, kóðun breyta og úrvinnsla
+
+```{r}
+knitr::include_app("https://drive.google.com/file/d/1f7zvDf6OGYrxAz0c0VsvGmF_sO6K0v3G/preview", height = 500)
+```
+
+
+---
+
+### Leiðbeiningar til að reikna út úr EPQ kvarðanum
+
+```{r}
+knitr::include_app("https://drive.google.com/file/d/1fEj36bTB4wzUtDOiFv92QoMv_eK3YyPQ/preview", height = 500)
+```
+
+---
+
+
+### Leiðbeiningar til að reikna út úr PANAS kvarðanum
+
+```{r}
+knitr::include_app("https://drive.google.com/file/d/1fN2A6pCnbRd1gMl_1JH8UqxWGsq8tzub/preview", height = 500)
+```
+
+---
+
+
+### Leiðbeiningar til að reikna út úr DS-14 kvarðanum
+
+```{r}
+knitr::include_app("https://drive.google.com/file/d/1fSmmLhAOfZHAbdgC62bj7gk6s6ZtAmsv/preview", height = 500)
+```
+
+---
+
+### Leiðbeiningar til að reikna út úr LOT-R kvarðanum
+
+```{r}
+knitr::include_app("https://drive.google.com/file/d/1frqNCoNjKp-ygOu4e6p7XPgnE-cEO-uH/preview", height = 500)
+```
+
+---
+
+### Leiðbeiningar til að reikna út úr HEXACO kvarðanum
+
+```{r}
+knitr::include_app("https://drive.google.com/file/d/1fcgepZhJl12Zsao3G3q8OBKumOi4SK2z/preview", height = 500)
+```
+
+---
+
+
+### Skorun viðbótarkvarða
+
+```{r}
+knitr::include_app("https://drive.google.com/file/d/1fvEOKnJZBloe6xtFrq1RQvlJVfql4Why/preview", height = 500)
+```
+
+
+---
+class: center middle inverse
+
+
+# Takk fyrir tímann í dag
+
+
+
+
