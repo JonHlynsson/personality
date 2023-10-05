@@ -3,7 +3,7 @@
     "path": "~/Háskóli Íslands/Kennsla/Persónuleikasálfræði 2023/R og glærur/Personuleikakennsla 2023/personality/index.Rmd",
     "project_path": "index.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "2143762915",
     "contents": "",
     "dirty": false,
     "created": 1696529885191.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "14,106",
-        "scrollLine": "12"
+        "cursorPosition": "5,2",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1696530347,
+    "lastKnownWriteTime": 1696531877,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1696530347298,
+    "last_content_update": 1696531877715,
     "read_only": false,
     "read_only_alternatives": []
 }

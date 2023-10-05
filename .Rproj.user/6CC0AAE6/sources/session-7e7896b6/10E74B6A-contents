@@ -25,9 +25,6 @@ navbar:
       - text: "Flýtilykill APA heimildaskráningar"
         href: "https://www.ru.is/media/skjol---bokasafn/APA-flytilykill.pdf"
         icon: fa-clipboard-list
-      - text: "Bókin Neistar"
-        href: "https://vefir.mms.is/flettibaekur/namsefni/neistar_rafbok/"
-        icon: fa-chalkboard
     - text: "Glærur"
       href: hlekkir-a-glaerur.html
       icon: fa-film

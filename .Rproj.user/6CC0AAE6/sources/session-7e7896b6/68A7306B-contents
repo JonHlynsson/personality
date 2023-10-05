@@ -1,9 +1,9 @@
 ---
-  title: "Forsíða"
+title: "Forsíða"
 output: 
   html_document:
-  theme: flatly
-css: default.css
+    theme: flatly
+    css: default.css
 bibliography: Heimildir.bib
 citation-style: APA7isl.csl
 ---
