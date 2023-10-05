@@ -1,0 +1,38 @@
+name: "SÁL320G Persónuleikasálfræði"
+icon: fa-empire
+navbar:
+  title: "SÁL320G Persónuleikasálfræði"
+  icon: fa-font-awesome-flag
+  left:
+    - text: "Forsíða"
+      href: index.html
+      icon: fa-home
+    - text: "Námsgögn"
+      icon: fa-archive
+      menu:
+      - text: "Hlekkir og almennar upplýsingar"
+        href: Rannsóknarverkefni.html
+        icon: fa-link
+      - text: "Skrambi - Villuleit"
+        href: "https://skrambi.arnastofnun.is/"
+        icon: fa-clipboard-list
+      - text: "Persónuleikinn"
+        href: persónuleikatexti.html
+        icon: fas fa-fingerprint
+      - text: "APA heimildaskráning"
+        href: "https://bokasafn.ru.is/apa/heim"
+        icon: fa-clipboard-list
+      - text: "Flýtilykill APA heimildaskráningar"
+        href: "https://www.ru.is/media/skjol---bokasafn/APA-flytilykill.pdf"
+        icon: fa-clipboard-list
+      - text: "Bókin Neistar"
+        href: "https://vefir.mms.is/flettibaekur/namsefni/neistar_rafbok/"
+        icon: fa-chalkboard
+    - text: "Glærur"
+      href: hlekkir-a-glaerur.html
+      icon: fa-film
+output_dir: "docs"
+
+# fa-school
+# fa-resistance - fa-file-text - fa-r-project
+# https://www.w3schools.com/icons/icons_reference.asp

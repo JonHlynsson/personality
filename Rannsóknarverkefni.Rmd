@@ -1,0 +1,17 @@
+---
+title: "Rannsóknarskýrsla"
+output: html_document
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Rannsóknarverkefni. Verkefnið felst í að skilgreina rannsóknarspurningu, vinna úr gögnum og skila sem fullbúinni rannsóknarskýrslu (nánari lýsingu má finna á verkefnablaði). Nemendur fá afhent gagnasafn úr rannsókn meðal samnemenda sinna í persónuleikasálfræði sem verður lagt fyrir í fyrirlestrartíma þann 5. september.
+
+Rannsóknarskýrsla: Skýrslan skal sett upp samkvæmt APA staðli og samanstendur af útdrætti, inngangi, aðferð, niðurstöðum, umræðu og heimildarskrá. Skýrslan gildir 35% af lokaeinkunn. 
+
+Lokaskil á rannsóknarskýrslu eru föstudaginn 24. nóvember á miðnætti. 
+
+Nemendafyrirlestur: Nemendur halda stuttan fyrirlestur þar sem þeir kynna meginniðurstöður rannsóknaverkefna. Nemendafyrirlestur gildir 5% af lokaeinkunn.

@@ -1,0 +1,42 @@
+---
+  title: "Forsíða"
+output: 
+  html_document:
+  theme: flatly
+css: default.css
+bibliography: Heimildir.bib
+citation-style: APA7isl.csl
+---
+  
+  
+![](images/Hlynsson/Banner.jpg)
+
+
+Á þessari vefsíðu má finna gögn sem tengjast verkefnatímum í námskeiðinu **SÁL320G: Persónuleikasálfræði**. 
+<br><br>
+  
+  
+  
+  <div class="pull-left">
+  Til að mynda má finna flipa fyrir glærur, námsgögn og hlekki.
+</div>
+  
+  
+  <div class="pull-right">
+  ![](images/Hlynsson/ProjectHlynsson.jpg){width=150px align="right"}
+</div>
+  
+  \newpage
+
+<br><br><br><br><br><br><br><br><br><hr>
+  
+  
+
+  
+  <br><br><br><br><br><br><br><br>
+  
+  ### Heimildir 
+  <div id="refs"></div>
+  
+  <hr>
+  `r r2symbols::symbol("copyright")` Jón Ingi Hlynsson - Síðasta breyting átti sér stað: `r Sys.Date()`
