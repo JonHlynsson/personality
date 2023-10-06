@@ -63,7 +63,16 @@ Jón Ingi Hlynsson
 
 #### Háskóli Íslands 
 
-#### Haustönn 2023
+#### Haustönn 2023  
+
+
+---
+class: center, middle
+background-image: url(images/HI_merki.png)
+background-size: 125px
+background-position: 5% 92%
+
+#### Hlekkur á glærur: https://jonhlynsson.github.io/personality/skorun-breyta.html
 
 ---
 class: center middle inverse
@@ -72,7 +81,6 @@ class: center middle inverse
 
 
 Að vera fær í að skrifa eflir getu okkar til þess að hugsa
-
 
 ---
 
@@ -149,6 +157,20 @@ knitr::include_graphics("images/aukaspurningar.png")
 
 
 ]
+
+
+---
+
+# Gagnlegir hlekkir
+
+.pull-left[
+[**Smelltu hér**](https://www.statsmadeasy.com/tutorial-1-working-with-quantitative-data/jamovi-importing-exporting-saving-data) til þess að opna leiðbeiningar um hvernig hægt sé að import-a gögnum í *Jamovi*.]
+
+.pull-right[### Hér eru leiðbeiningar fyrir **Jasp**
+
+<iframe width="1188" height="350" src="https://www.youtube.com/embed/M0N-v6W-7P4" title="JASP 0.10 Tutorial: Import .SAV Files (Episode 5)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+]
+
 
 ---
 
