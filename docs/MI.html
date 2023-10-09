@@ -9,10 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Ísak Örn Ívarsson" />
 
-<meta name="date" content="2023-10-09" />
+<meta name="date" content="2023-10-07" />
 
-<title>Rannsóknarskýrsla</title>
+<title>Meðaltals tilreikningur (e. mean imputation)</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -30,11 +31,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
@@ -62,28 +61,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-/* for pandoc --citeproc since 2.11 */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="default.css" type="text/css" />
 
@@ -244,70 +221,10 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-
-
-
 <style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
+.code-folding-btn { margin-bottom: 4px; }
 </style>
+
 
 
 
@@ -317,16 +234,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -420,62 +327,164 @@ div.tocify {
 
 <div id="header">
 
-
-
-<h1 class="title toc-ignore">Rannsóknarskýrsla</h1>
-<h4 class="date">2023-10-09</h4>
-
-</div>
-
-
-<p><strong>Rannsóknarverkefni</strong>. Verkefnið felst í að skilgreina
-rannsóknarspurningu, vinna úr gögnum og skila sem fullbúinni
-rannsóknarskýrslu. Nemendur fá afhent gagnasafn úr rannsókn meðal
-samnemenda sinna í persónuleikasálfræði sem verður lagt fyrir í
-fyrirlestrartíma þann 5. september.</p>
-<p>Rannsóknarskýrsla: Skýrslan skal sett upp samkvæmt APA staðli og
-samanstendur af útdrætti, inngangi, aðferð, niðurstöðum, umræðu og
-heimildarskrá. Skýrslan gildir 35% af lokaeinkunn.</p>
-<p>Lokaskil á rannsóknarskýrslu eru föstudaginn 24. nóvember á
-miðnætti.</p>
-<p>Nemendafyrirlestur: Nemendur halda stuttan fyrirlestur þar sem þeir
-kynna meginniðurstöður rannsóknaverkefna. Nemendafyrirlestur gildir 5%
-af lokaeinkunn.</p>
-<div id="verkefnalýsing" class="section level2">
-<h2>Verkefnalýsing</h2>
-<iframe src="https://drive.google.com/file/d/1E01Rf2za2B-VLixb0h15EryBMBhFq1gU/preview?showcase=0" width="672" height="1000" data-external="1">
-</iframe>
-</div>
-<div id="hugarkort-um-ritun-rannsóknarritgerða-í-sálfræði"
-class="section level2">
-<h2>Hugarkort: <a
-href="https://drive.google.com/file/d/1VkIamf51d3a3mNvP-gYsugPmSXxS6WCn/preview"><strong>Um
-ritun rannsóknarritgerða í sálfræði</strong></a></h2>
-<p><span class="citation">Þórunn Hanna Halldórsdóttir og Daníel Ólason
-(1997)</span> skrifuðu frábæra grein um ritun rannsókarritgerða í
-sálfræði.</p>
-<iframe src="https://drive.google.com/file/d/13O2oC3te9q-vu8BmOEO2h75lqPdKEdgz/preview?showcase=0" width="672" height="750" data-external="1">
-</iframe>
-<div id="heimildir" class="section level3">
-<h3>Heimildir</h3>
-<div id="refs" class="references csl-bib-body hanging-indent"
-line-spacing="2">
-<div id="ref-UmRitunRannsoknarritgerda1997" class="csl-entry">
-Þórunn Hanna Halldórsdóttir og Daníel Ólason. (1997). Um Ritun
-Rannsóknarritgerða í Sálfræði. <em>Ársrit sálfræðinema</em>, <em>5</em>,
-41–45.
-</div>
-</div>
-<hr>
-<p>&#169; Jón Ingi Hlynsson - Síðasta breyting átti sér stað:
-2023-10-09</p>
-</div>
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
 </div>
 
 
 
+<h1 class="title toc-ignore">Meðaltals tilreikningur (e. <em>mean
+imputation</em>)</h1>
+<h4 class="author">Ísak Örn Ívarsson</h4>
+<h4 class="date">2023-10-07</h4>
+
 </div>
-</div>
+
+
+<p><strong>Meðaltals tilreikningur (e. <em>mean
+imputation</em>)</strong></p>
+<p>Hugmyndin um meðaltals tilreikning vísar í þá hugmynd að til þess að
+varðveita gögn er betra að setja inn meðaltal úrtaksins í einstakar
+breytur hjá einstaklingum frekar en að henda þeim út.</p>
+<p>Til dæmis ef einstaklingur svarar flestum spurningum á spurningalista
+en sleppir að svara nokkrum þá væri það æskilegra að nota tilreikning en
+að henda honum út.</p>
+<p>Til þess nota meðaltals tilreikning þarftu að reikna meðaltal fyrir
+breytuna í úrtakinu og nota það til þess að fylla inní eyðurnar hjá þeim
+sem svöruðu ekki.</p>
+<p>Sjáum hvernig þetta lýtur út:</p>
+<pre class="r"><code>print.data.frame(gagnasafn)</code></pre>
+<pre><code>##      Þatttakandi Spurning 1 Spurning 2 Spurning 3 Spurning 4 Spurning 5
+## 1   Þatttakandi1          1          2          2          3          5
+## 2   Þatttakandi2          1          3          1          3          2
+## 3   Þatttakandi3          2          2          3          2         NA
+## 4   Þatttakandi4          2          2         NA          2          1
+## 5   Þatttakandi5          3          1          3          1          4
+## 6   Þatttakandi6         NA         NA         NA         NA         NA
+## 7   Þatttakandi7          2          4          1          5          1
+## 8   Þatttakandi8          4          1          1          1          1
+## 9   Þatttakandi9          3          2          3          2          3
+## 10 Þatttakandi10          4         NA          1         NA          5
+## 11 Þatttakandi11          2          1          5          5          3
+## 12 Þatttakandi12          4          1          1          4          5
+## 13 Þatttakandi13          4          4          3          3         NA
+## 14 Þatttakandi14          3          5         NA         NA         NA
+## 15 Þatttakandi15          1          3          1          3          4
+##    Spurning 6
+## 1           3
+## 2           2
+## 3          NA
+## 4           3
+## 5           3
+## 6          NA
+## 7           4
+## 8           1
+## 9           4
+## 10          2
+## 11          3
+## 12          1
+## 13          2
+## 14         NA
+## 15          5</code></pre>
+<p>Hérna er gagnasafn þar sem má sjá að sumir þátttakendur hafa ekki
+svarað öllum spurningum. ATH: Áður en við byrjum tilreikna þurfum við að
+taka afstöðu til þess hve margar spurningar má vanta áður en við
+fjarlægjum þátttakandann. Ekkert eitt svar er við þessari spurningu og
+hér þurfum við því að taka vandaða afstöðu.</p>
+<p>Skoðum gagnasafnið;</p>
+<p>-Við sjáum að þátttakandi 6 sleppti því að svara öllum spurningum,
+við ákveðum því að fjarlægja hann.</p>
+<p>-Einnig má sjá að þátttakandi 14 sleppti 4 spurningum af 6. Við
+skulum því fjarlægja hann þar sem hann hefur sleppt því að svara
+meirihlutanum af spurningunum. Við gerum grein fyrir þessari kríteríu í
+aðferðakaflanum.</p>
+<p>-Hinum vantar aðeins 1-2 spurningar, við skulum því nota tilreikning
+fyrir þá.</p>
+<pre class="r"><code>print.data.frame(gagnasafn)</code></pre>
+<pre><code>##      Þatttakandi Spurning 1 Spurning 2 Spurning 3 Spurning 4 Spurning 5
+## 1   Þatttakandi1          1          2          2          3          5
+## 2   Þatttakandi2          1          3          1          3          2
+## 3   Þatttakandi3          2          2          3          2         NA
+## 4   Þatttakandi4          2          2         NA          2          1
+## 5   Þatttakandi5          3          1          3          1          4
+## 6   Þatttakandi7          2          4          1          5          1
+## 7   Þatttakandi8          4          1          1          1          1
+## 8   Þatttakandi9          3          2          3          2          3
+## 9  Þatttakandi10          4         NA          1         NA          5
+## 10 Þatttakandi11          2          1          5          5          3
+## 11 Þatttakandi12          4          1          1          4          5
+## 12 Þatttakandi13          4          4          3          3         NA
+## 13 Þatttakandi14          3          5         NA         NA         NA
+## 14 Þatttakandi15          1          3          1          3          4
+##    Spurning 6
+## 1           3
+## 2           2
+## 3          NA
+## 4           3
+## 5           3
+## 6           4
+## 7           1
+## 8           4
+## 9           2
+## 10          3
+## 11          1
+## 12          2
+## 13         NA
+## 14          5</code></pre>
+<p>Hér er búið að taka út þátttakendur 6 og 14. Núna skulum við reikna
+meðaltal fyrir hverja spurningu.</p>
+<p>Hér sjáum við meðaltöl fyrir hverja spurningu:</p>
+<p>Meðaltal fyrir spurningu 1 = 3</p>
+<p>Meðaltal fyrir spurningu 2 = 2</p>
+<p>Meðaltal fyrir spurningu 3 = 2</p>
+<p>Meðaltal fyrir spurningu 4 = 3</p>
+<p>Meðaltal fyrir spurningu 5 = 3</p>
+<p>Meðaltal fyrir spurningu 6 = 3</p>
+<p>Tökum því meðaltalið og setjum það inn</p>
+<pre class="r"><code>print.data.frame(gagnasafn)</code></pre>
+<pre><code>##      Þatttakandi Spurning 1 Spurning 2 Spurning 3 Spurning 4 Spurning 5
+## 1   Þatttakandi1          1          2          2          3          5
+## 2   Þatttakandi2          1          3          1          3          2
+## 3   Þatttakandi3          2          2          3          2          3
+## 4   Þatttakandi4          2          2          2          2          1
+## 5   Þatttakandi5          3          1          3          1          4
+## 6   Þatttakandi7          2          4          1          5          1
+## 7   Þatttakandi8          4          1          1          1          1
+## 8   Þatttakandi9          3          2          3          2          3
+## 9  Þatttakandi10          4          2          1          3          5
+## 10 Þatttakandi11          2          1          5          5          3
+## 11 Þatttakandi12          4          1          1          4          5
+## 12 Þatttakandi13          4          4          3          3          3
+## 13 Þatttakandi14          3          5          2          3          3
+## 14 Þatttakandi15          1          3          1          3          4
+##    Spurning 6
+## 1           3
+## 2           2
+## 3           3
+## 4           3
+## 5           3
+## 6           4
+## 7           1
+## 8           4
+## 9           2
+## 10          3
+## 11          1
+## 12          2
+## 13          3
+## 14          5</code></pre>
+<p>Núna vantar ekkert gildi og við getum því reiknað t.d. fylgni á milli
+breyta.</p>
+<pre class="r"><code>ggplot(gagnasafn, aes(x=`Spurning 1`, y=`Spurning 2`)) +
+    geom_point() +
+    geom_smooth(method=lm, se=FALSE, col=&#39;red&#39;, size=2)</code></pre>
+<p><img src="MI_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+
+
+
 
 </div>
 
@@ -507,36 +516,12 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-
 <script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
 });
 </script>
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

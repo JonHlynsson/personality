@@ -1,0 +1,101 @@
+---
+title: "Meðaltals tilreikningur (e. *mean imputation*)"
+author: "Ísak Örn Ívarsson"
+output:
+   html_document: 
+    theme: flatly
+    css: default.css
+    code_folding: hide
+    highlight: textmate
+date: "2023-10-07"
+---
+
+```{r setup, include=FALSE}
+library(readxl)
+library(ggplot2) 
+library(ggpubr)
+gagnasafn <- read_excel("test.xlsx", na = "N/A")
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Meðaltals tilreikningur (e. *mean imputation*)**
+
+Hugmyndin um meðaltals tilreikning vísar í þá hugmynd að til þess að varðveita gögn er betra að setja inn meðaltal úrtaksins í einstakar breytur hjá einstaklingum frekar en að henda þeim út.
+
+Til dæmis ef einstaklingur svarar flestum spurningum á spurningalista en sleppir að svara nokkrum þá væri það æskilegra að nota tilreikning en að henda honum út.
+
+Til þess nota meðaltals tilreikning þarftu að reikna meðaltal fyrir breytuna í úrtakinu og nota það  til þess að fylla inní eyðurnar hjá þeim sem svöruðu ekki.
+
+Sjáum hvernig þetta lýtur út:
+
+```{r}
+print.data.frame(gagnasafn)
+
+```
+
+Hérna er gagnasafn þar sem má sjá að sumir þátttakendur hafa ekki svarað öllum spurningum. ATH: Áður en við byrjum tilreikna þurfum við að taka afstöðu til þess hve margar spurningar má vanta áður en við fjarlægjum þátttakandann. Ekkert eitt svar er við þessari spurningu og hér þurfum við því að taka vandaða afstöðu.
+
+Skoðum gagnasafnið;
+
+-Við sjáum að þátttakandi 6 sleppti því að svara öllum spurningum, við ákveðum því að fjarlægja hann.
+
+-Einnig má sjá að þátttakandi 14 sleppti 4 spurningum af 6. Við skulum því fjarlægja hann þar sem hann hefur sleppt því að svara meirihlutanum af spurningunum. Við gerum grein fyrir þessari kríteríu í aðferðakaflanum.
+
+```{r, include=FALSE}
+gagnasafn <- gagnasafn[-6,]
+gagnasafn <- gagnasafn[-15,]
+```
+
+-Hinum vantar aðeins 1-2 spurningar, við skulum því nota tilreikning fyrir þá.
+
+```{r}
+print.data.frame(gagnasafn)
+```
+
+Hér er búið að taka út þátttakendur 6 og 14. Núna skulum við reikna meðaltal fyrir hverja spurningu.
+
+```{r, include=FALSE}
+spr1 <- round(mean(gagnasafn$`Spurning 1`, na.rm = T),0)
+spr2 <- round(mean(gagnasafn$`Spurning 2`, na.rm = T),0)
+spr3 <- round(mean(gagnasafn$`Spurning 3`, na.rm = T),0)
+spr4 <- round(mean(gagnasafn$`Spurning 4`, na.rm = T),0)
+spr5 <- round(mean(gagnasafn$`Spurning 5`, na.rm = T),0)
+spr6 <- round(mean(gagnasafn$`Spurning 6`, na.rm = T),0)
+```
+
+Hér sjáum við meðaltöl fyrir hverja spurningu:
+
+Meðaltal fyrir spurningu 1 = `r spr1`
+
+Meðaltal fyrir spurningu 2 = `r spr2`
+
+Meðaltal fyrir spurningu 3 = `r spr3`
+
+Meðaltal fyrir spurningu 4 = `r spr4`
+
+Meðaltal fyrir spurningu 5 = `r spr5`
+
+Meðaltal fyrir spurningu 6 = `r spr6`
+
+Tökum því meðaltalið og setjum það inn
+
+```{r, include=FALSE}
+gagnasafn$`Spurning 1`[is.na(gagnasafn$`Spurning 1`)] <- round(mean(gagnasafn$`Spurning 1`, na.rm = TRUE),0)
+gagnasafn$`Spurning 2`[is.na(gagnasafn$`Spurning 2`)] <- round(mean(gagnasafn$`Spurning 2`, na.rm = TRUE),0)
+gagnasafn$`Spurning 3`[is.na(gagnasafn$`Spurning 3`)] <- round(mean(gagnasafn$`Spurning 3`, na.rm = TRUE),0)
+gagnasafn$`Spurning 4`[is.na(gagnasafn$`Spurning 4`)] <- round(mean(gagnasafn$`Spurning 4`, na.rm = TRUE),0)
+gagnasafn$`Spurning 5`[is.na(gagnasafn$`Spurning 5`)] <- round(mean(gagnasafn$`Spurning 5`, na.rm = TRUE),0)
+gagnasafn$`Spurning 6`[is.na(gagnasafn$`Spurning 6`)] <- round(mean(gagnasafn$`Spurning 6`, na.rm = TRUE),0)
+```
+
+```{r}
+print.data.frame(gagnasafn)
+```
+
+Núna vantar ekkert gildi og við getum því reiknað t.d. fylgni á milli breyta.
+
+```{r, error=FALSE, message=FALSE, warning=FALSE}
+ggplot(gagnasafn, aes(x=`Spurning 1`, y=`Spurning 2`)) +
+    geom_point() +
+    geom_smooth(method=lm, se=FALSE, col='red', size=2)
+```

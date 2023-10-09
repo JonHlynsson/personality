@@ -1,0 +1,990 @@
+## clean the environment -------------------------------------------------------
+rm(list = ls(all=T)) # remove all variables (all=T takes care of hidden objects)
+graphics.off() # turn off plots
+cat("\014") # clear the console
+# write.csv(dLong, "test1.csv", row.names=FALSE)
+## -----------------------------------------------------------------------------
+
+# screening and post-assessment is at the bottom of the document! [data = "t"]
+
+# https://rviews.rstudio.com/2019/03/01/some-r-packages-for-roc-curves/
+
+# Load necessary libraries -----------------------------------------------------
+library(readxl)
+library(ggpubr)
+library(gridExtra)
+library(cowplot)
+library(gridGraphics)
+library(psych)
+library(ggfortify)
+library(parameters)
+library(robust)
+library(gtsummary)
+library(caret)
+library(mirt)
+library(shiny)
+library(ggmirt)
+library(grid)
+library(directlabels)
+library(KernSmoothIRT)
+library(ggpubr) # for convenient plotting 
+library(psych)
+library(gmodels)
+library(DescTools)
+library(Hmisc)
+library(GPArotation)
+library(misty)
+library(lavaan) # for CFA
+library(lavaanPlot) # for CFA
+library(tidyverse)
+library(kableExtra) # for nice tables
+library(knitr) # for kable function and markdown output
+library(apaTables)
+library(semTools)
+library(tidyverse)
+
+options(scipen = 999) #show as integers instead of exponential notations
+options(digits=4) #Number of digits in output
+# ------------------------------------------------------------------------------
+
+
+
+
+## Data import and sanity checks -----------------------------------------------
+
+
+
+# SCREENING --------------------------------------------------------------------
+# read in screening data 
+ds <- read_excel("~/Stockholm University/semester 4/Pro 3/TRAbee_survey238598_230529 (1).xlsx")
+
+# rename variables
+
+# ds <- ds %>% 
+#   rename(BBQ1 <- `BBQ.  - 1. Jag är nöjd med min fritid: jag har möjlighet att göra det jag vill för att slappna av och roa mig.`) %>% 
+#   rename(BBQ2 <- `BBQ.  - 2. Min fritid är viktig för min livskvalitet.`) %>% 
+#   rename(BBQ3 <- `BBQ.  - 3. Jag är nöjd med hur jag ser på livet: jag vet vad som betyder mycket för mig, vad jag tror på och vad jag vill göra med mitt liv.`) %>% 
+#   rename(BBQ4 <- `BBQ.  - 4. Hur jag ser på livet är viktigt för min livskvalitet.`) %>% 
+#   rename(BBQ5 <- `BBQ.  - 5. Jag är nöjd med mina möjligheter att få vara kreativ: att få använda min fantasi i vardagen, inom en hobby, på jobbet eller i studier.`) %>% 
+#   rename(BBQ6 <- `BBQ.  - 6. Att få vara kreativ är viktigt för min livskvalitet.`) %>% 
+#   rename(BBQ7 <- `BBQ.  - 7. Jag är nöjd med mitt lärande: jag har möjlighet och lust att lära mig nya spännande saker och färdigheter som intresserar mig.`) %>% 
+#   rename(BBQ8 <- `BBQ.  - 8. Lärande är viktigt för min livskvalitet.`) %>% 
+#   rename(BBQ9 <- `BBQ.  - 9. Jag är nöjd med vänner och vänskap: jag har vänner som jag umgås med och som stöttar mig (så många vänner som jag vill ha och behöver).`) %>% 
+#   rename(BBQ10 <- `BBQ.  - 10. Vänner och vänskap är viktigt för min livskvalitet.`) %>% 
+#   rename(BBQ11 <- `BBQ.  - 11. Jag är nöjd med mig själv som individ: jag tycker om och respekterar mig själv.`) %>% 
+#   rename(BBQ12 <- `BBQ.  - 12. Att jag är nöjd med mig själv som individ är viktigt för min livskvalitet.`)
+
+ds <- ds %>% 
+  rename(SES = `Demografi.Economic. Jämfört med andras, hur skulle du uppskatta din ekonomiska situation?`)
+
+ds <- ds %>% 
+  rename(edu = `Demografi.Education. Vilken är din högst avslutade utbildningsnivå?`)
+
+ds <- ds %>% 
+  rename(age = `Demografi.Age. Ålder:`)
+
+ds <- ds %>% rename(Sex = `Demografi.Gender. Vilket kön har du?`)
+
+ds <- ds %>% rename(ID = Användarnamn)
+
+ds <- ds %>% 
+  rename(Treatment_Group = Grupper) %>% 
+  # rename(Sex = Demografi.Gender..Vilket.kön.har.du.) %>% 
+  rename(Children_u18 = `Demografi.Children. Finns det barn under 18 år i ditt hushåll?`) %>% 
+  rename(Marital_Stat = `Demografi.MaritalStatus. Civilstånd:`) %>% 
+  rename(Occupation = `Demografi.Occupation. Vilken är din huvudsakliga sysselsättning?`) %>% 
+  rename(Meds = `Tidigare vård.Medicin. Äter du medicin mot oro, ångest, nedstämdhet eller depression?`)
+
+ds$Treatment_Group <- as.factor(ds$Treatment_Group)
+ds$Treatment_Group %>% levels()
+ds$Treatment_Group <- factor(ds$Treatment_Group, 
+                             labels = c("WL-8w-no_f",
+                                        "WL-8w_f",
+                                        "WL-16w_no_f",
+                                        "WL-16w_f",
+                                        "AP-8w_no_f",
+                                        "AP-8w_f",
+                                        "AP-16w_no_f",
+                                        "AP-16w_f",
+                                        "UP-8w_no_f",
+                                        "UP-8w_f",
+                                        "UP-16w_no_f",
+                                        "UP-16w_f",
+                                        "Excluded"), 
+                             levels = c("1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5",
+                                        "6",
+                                        "7",
+                                        "8",
+                                        "9",
+                                        "10",
+                                        "11",
+                                        "12",
+                                        "Excluded"))
+
+ds$Sex <- as.factor(ds$Sex)
+ds$Sex <- factor(ds$Sex, labels = c("Female", "Male", "Other"))
+
+ds$Children_u18 <- as.factor(ds$Children_u18)
+ds$Children_u18 <- factor(ds$Children_u18, levels = c("0", "1", "-oth-"), 
+                          labels = c("No", "Yes", "Complicated/Sometimes"))
+
+ds$Occupation <- as.factor(ds$Occupation)
+ds$Occupation <- factor(ds$Occupation, labels = c("Working", "Studying", 
+                                                  "Seeking work", "Retired", 
+                                                  "Parental leave", "Sick leave"))
+ds$Marital_Stat <- as.factor(ds$Marital_Stat)
+ds$Marital_Stat <- factor(ds$Marital_Stat, labels = c("Single/Live alone",
+                                                      "Live alone but in a relationship",
+                                                      "Married/Live with partner"))
+
+ds$edu <- as.factor(ds$edu)
+ds$edu %>% summary()
+ds$edu <- factor(ds$edu, labels = c("Elementary school",
+                                    "High school",
+                                    "College level education < 3 years",
+                                    "College level education > 3 years"))
+
+ds$SES <- as.factor(ds$SES)
+ds$SES %>% levels()
+ds$SES <- factor(ds$SES, labels = c("much worse than others'",
+                                    "worse than others'",
+                                    "about the same as others'",
+                                    "better than others'",
+                                    "much better than others'"))
+
+ds$Meds <- as.factor(ds$Meds)
+ds$Meds %>% levels()
+ds$Meds <- factor(ds$Meds, labels = c("No", "Yes"))
+
+
+
+
+# mark individuals with non-binary gender identity as NA to combat potential 
+# bias 
+ds$Sex_01 <-  ifelse(ds$Sex == "Male", yes = "Male", 
+                        ifelse(ds$Sex == "Female", yes = "Female", no = NA))
+
+# sanity check that this worked approprioatly
+sum(ds$Sex == "Male")
+sum(ds$Sex_01 == "Male", na.rm = T)
+
+sum(ds$Sex == "Female")
+sum(ds$Sex_01 == "Female", na.rm = T)
+
+
+## CFA -------------------------------------------------------------------------
+
+
+ds$BBQ_full <- ds[ , c(44:55)]
+
+# create correct sum scores for FA
+BBQ <- ds$BBQ_full
+
+# Item 1 * Item 2 = leisure_time
+BBQ$leisure_time <- BBQ$BBQ1 * BBQ$BBQ2
+
+# Item 3 * Item 4 = view_on_life
+BBQ$view_on_life <- BBQ$BBQ3 * BBQ$BBQ4
+
+# Item 5 * Item 6 = creativity
+BBQ$creativity <- BBQ$BBQ5 * BBQ$BBQ6
+
+# Item 7 * Item 8 = learning
+BBQ$learning <- BBQ$BBQ7 * BBQ$BBQ8
+
+# Item 9 * Item 10 = friends_and_friendship
+BBQ$friends_and_friendship <- BBQ$BBQ9 * BBQ$BBQ10
+
+
+# Item 11 * Item 12 = view_of_self
+BBQ$view_of_self <- BBQ$BBQ11 * BBQ$BBQ12
+
+# filter out those below 18 y/o
+ds$ageN <- ifelse(ds$age < 18, NA, ds$age) 
+
+BBQ_corr <- BBQ[, c(13:18)]
+
+BBQ_corr$age <- ds$ageN
+BBQ_corr$sex <- ds$Sex_01
+
+
+# PHQ: preprocessing 
+
+ds$PHQ <- ifelse(ds$`PHQ-9|SUM` >= 10, "Clinical Depression", "Subclinical Depression")
+
+describe(ds$PHQ)
+
+
+# GAD: preprocessing 
+
+ds$GAD <- ifelse(ds$`GAD-7|SUM` >= 8, "Clinical Anxiety", "Subclinical Anxiety")
+
+describe(ds$GAD)
+
+
+BBQ_corr$PHQ <- ds$PHQ
+
+BBQ_corr$GAD <- ds$GAD
+
+
+# Prune all participants below 18 y/o 
+BBQ_corr <- BBQ_corr %>% 
+  filter(!is.na(age))
+
+
+
+psych::describe(BBQ_corr$age) # the median is 42
+
+BBQ_corr$age_corr <- ifelse(BBQ_corr$age < 42, "below median age", 
+                            "above median age")
+
+describe(BBQ_corr$age_corr) # sirca evenly split 
+
+2477/3384
+
+
+
+
+# FA NEW --
+
+BBQ_corr[, c(1:6)] %>% KMO() # .79 => suitable for FA
+
+BBQ_corr[, c(1:6)] %>% bartlett.test() # significant, p<0.001 => data suitable for FA
+
+
+
+
+# Make a scree plot
+scree <- fa.parallel(BBQ_corr[, c(1:6)], 
+                     fa="fa", # suggests 3 factors if this is = "fa" - but 1 component if this is = 'pc'
+                     main= "", 
+                     n.iter=20,
+                     quant=.95,
+                     cor="cor",
+                     fm = "ml",
+                     plot=TRUE,
+                     correct=.5, 
+                     ylabel = "Eigenvalues", 
+                     show.legend = F) # suggests 3 factors 
+# however, there is a case to be made for a single interpritable factor in this graph 
+scree
+
+# make pretty plot ----
+obs <- data.frame(scree$fa.values)
+obs$type = c('Observed Data')
+obs$num = c(row.names(obs))
+obs$num = as.numeric(obs$num)
+colnames(obs) = c('eigenvalue', 'type', 'num')
+
+#Calculate quantiles for eigenvalues, but only store those from simulated CF model in percentile1
+percentile = apply(scree$values,2,function(x) quantile(x,.95))
+min = as.numeric(nrow(obs))
+min = (4*min) - (min-1)
+max = as.numeric(nrow(obs))
+max = 4*max
+percentile1 = percentile[min:max]
+
+#Create data frame called &amp;amp;amp;amp;amp;quot;sim&amp;amp;amp;amp;amp;quot; with simulated eigenvalue data
+sim = data.frame(percentile1)
+sim$type = c('Simulated Data (95th %ile)')
+sim$num = c(row.names(obs))
+sim$num = as.numeric(sim$num)
+colnames(sim) = c('eigenvalue', 'type', 'num')
+
+#Merge the two data frames (obs and sim) together into data frame called eigendat
+eigendat = rbind(obs,sim)
+
+
+# APA theme
+apatheme=theme_bw()+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.border = element_blank(),
+        text=element_text(family='Arial'),
+        legend.title=element_blank(),
+        legend.position=c(.7,.8),
+        axis.line.x = element_line(color='black'),
+        axis.line.y = element_line(color='black'))
+
+#Use data from eigendat. Map number of factors to x-axis, eigenvalue to y-axis, 
+# and give different data point shapes depending on whether eigenvalue is observed or simulated
+p = ggplot(eigendat, aes(x=num, y=eigenvalue, shape=type)) +
+  #Add lines connecting data points
+  geom_line()+
+  #Add the data points.
+  geom_point(size=4)+
+  #Label the y-axis 'Eigenvalue'
+  scale_y_continuous(name='Eigenvalue')+
+  #Label the x-axis 'Factor Number', and ensure that it ranges from 1-max # of factors, increasing by one with each 'tick' mark.
+  scale_x_continuous(name='Factor Number', breaks=min(eigendat$num):max(eigendat$num))+
+  #Manually specify the different shapes to use for actual and simulated data, in this case, white and black circles.
+  scale_shape_manual(values=c(16,1)) +
+  #Add vertical line indicating parallel analysis suggested max # of factors to retain
+  # geom_vline(xintercept = scree$nfact, linetype = 'dashed')+
+  # kaiser criterion
+  geom_hline(yintercept = 1, linetype = 'dashed', show.legend = T)+
+  #Apply our apa-formatting theme
+  apatheme
+#Call the plot. Looks pretty!
+p
+
+ggplot(eigendat, aes(x=num, y=eigenvalue, shape=type)) +
+  #Add lines connecting data points
+  geom_line()+
+  #Add the data points.
+  geom_point(size=4)+
+  #Label the y-axis 'Eigenvalue'
+  scale_y_continuous(name='Eigenvalue')+
+  #Label the x-axis 'Factor Number', and ensure that it ranges from 1-max # of factors, increasing by one with each 'tick' mark.
+  scale_x_continuous(name='Factor Number', breaks=min(eigendat$num):max(eigendat$num))+
+  #Manually specify the different shapes to use for actual and simulated data, in this case, white and black circles.
+  scale_shape_manual(values=c(16,1)) +
+  #Add vertical line indicating parallel analysis suggested max # of factors to retain
+  # geom_vline(xintercept = scree$nfact, linetype = 'dashed')+
+  # kaiser criterion
+  geom_hline(yintercept = 1, linetype = 'dashed', show.legend = T)+
+  #Apply our apa-formatting theme
+  apatheme
+
+
+
+# EFA -----------
+
+efa1 <- fa(BBQ_corr, 
+           nfactors = 1, 
+           rotate="oblimin", 
+           fm="ml", 
+           missing=TRUE, 
+           impute="mean", ) 
+print(efa1, sort = T, cut = 0.4)
+
+
+
+
+### CFA ------------------------------------------------------------------------
+
+# AGE -------------
+
+# Configural invariance: age ---------------------------------------------------
+
+# one factor solution
+
+onefactor <- 'f1 =~ leisure_time + view_on_life + creativity + 
+                    learning + friends_and_friendship + view_of_self'
+
+
+# fit a one factor model corrected for *age*
+age.config <- sem(model = onefactor, data = BBQ_corr, 
+                  estimator = "WLSMV", group = "age_corr")
+
+# display the results. Standardised = TRUE gives beta values (std.all column)
+age.config %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+
+# Metric invariance: age -------------------------------------------------------
+
+# fit a one factor model corrected for *age*
+age.metric <- sem(model = onefactor, data = BBQ_corr, 
+                  estimator = "WLSMV", group.equal = "loadings", 
+                  group = "age_corr")
+
+age.metric %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(age.config, age.metric) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr")) 
+# Chisquire test not significant => 
+# this is evidence of metric invariance across age groups
+
+
+# Scalar invariance: age -------------------------------------------------------
+age.scalar <- sem(model = onefactor, data = BBQ_corr, 
+                  estimator = "WLSMV", group.equal = c("loadings", "intercepts"), 
+                  group = "age_corr")
+
+age.scalar %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(age.metric, age.scalar) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))  # Chisquire test is significant => 
+# this is evidence of scalar variance across age groups
+
+# ΔCFI 
+0.972 - 0.964
+
+
+# Partial MI: age -----------
+lavTestScore(age.scalar)
+# influenceal paramaters:
+#  .p6. == .p26. => "f1 =~ view_of_self" ==> is measured by: p=0.019
+#  .p15. == .p35. => "view_on_life ~1" ==> intercept: p=0.056
+#  .p18. == .p38. => "friends_and_friendship ~1" ==> intercept: p=0.000 
+
+parTable(age.scalar)
+
+
+# Adjust the model
+age.scalar2 <- sem(model = onefactor, data = BBQ_corr, 
+                   estimator = "WLSMV", group.equal = c("loadings", "intercepts"), 
+                   group = "age_corr", 
+                   group.partial = c("friends_and_friendship ~ 1" 
+                                     # ,"view_on_life ~1"
+                                     ))
+
+age.scalar2 %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(age.metric, age.scalar2) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+
+# ΔCFI 
+0.972 - 0.971
+
+
+
+# adusting for view on life does not improve model fit - neither does adusting for veiw of self
+
+age.strict <- sem(model = onefactor, data = BBQ_corr, 
+                   estimator = "WLSMV", group.equal = c("loadings", "intercepts", "residuals"), 
+                   group = "age_corr", 
+                   group.partial = c("friends_and_friendship ~ 1"
+                                     # ,"view_on_life ~1"
+                                     ))
+
+age.strict %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(age.scalar2, age.strict) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+# strict scalar invariance was not established for the BBQ
+
+# ΔCFI 
+0.971 - 0.970
+
+lavTestScore(age.strict)
+# influenceal paramaters:
+#  .p2. == .p22. => "f1 =~ view_on_life" ==> is measured by: p=0.026
+#  .p9. == .p29. => ==> :  p=0.025
+#  .p11. == .p31. =>  ==> : p=0.024
+#  .p17. == .p37. => ==>  : p=0.045
+
+parTable(age.strict)
+
+# .p6. == .p26. => "f1 =~ view_of_self" ==> is measured by: p=0.017
+#  .p15. == .p35. => "view_on_life ~1" ==> intercept: p=0.047
+#  .p18. == .p38. => "friends_and_friendship ~1" ==> intercept: p=0.000 
+
+
+# Aggregate model comparison
+compareFit(age.config, age.metric, age.scalar2, age.strict, moreIndices = TRUE, nested = T) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+
+
+
+# semTools::measurementInvariance(model = onefactor, 
+#                                 data = BBQ_corr, 
+#                                 estimator = "WLSMV",
+#                                 group = "age_corr",
+#                                 meanstructure = T)
+
+
+# SEX --------------------------------------------------------------------------
+
+# omit missing variables
+BBQ_corr_sex <- BBQ_corr
+# BBQ_corr_sex <- na.omit(BBQ_corr)
+BBQ_corr_sex$sex <- ifelse(BBQ_corr$sex == "Female" | BBQ_corr$sex == "Male", BBQ_corr$sex, NA)
+BBQ_corr_sex$sex %>% describe()
+# fit a one factor model corrected for *SEX*
+
+sex.config <- sem(model = onefactor, data = BBQ_corr_sex, 
+                  estimator = "WLSMV", group = "sex")
+
+# display the results. Standardised = TRUE gives beta values (std.all column)
+sex.config %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Metric invariance: sex -------------------------------------------------------
+
+# fit a one factor model corrected for *sex*
+sex.metric <- sem(model = onefactor, data = BBQ_corr_sex, 
+                  estimator = "WLSMV", group.equal = "loadings", 
+                  group = "sex")
+sex.metric%>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(sex.config, sex.metric) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+# Chisquire test not significant => 
+# this is evidence of metric invariance across genders
+
+
+# Scalar invariance: sex -------------------------------------------------------
+sex.scalar <- sem(model = onefactor, data = BBQ_corr_sex, 
+                  estimator = "WLSMV", group.equal = c("loadings", "intercepts"), 
+                  group = "sex")
+sex.scalar %>% summary(fit.measures=T)
+# Model comparison
+compareFit(sex.metric, sex.scalar) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr")) # Chisquire test is significant => 
+# this is evidence of scalar variance across genders
+
+
+# Partial MI: sex -----------
+lavTestScore(sex.scalar)
+# influenceal paramaters:
+#  .p14. == .p34 => "leisure_time ~1" ==> intercept: p=0.007
+#  .p15. == .p35. => "view_on_life ~1" ==> intercept: p=0.000
+#  .p16. == .p36. => "creativity ~1" ==> intercept: p=0.001
+#  .p18. == .p38. => "friends_and_friendship ~1" ==> intercept: p=0.000
+
+parTable(sex.scalar)
+
+
+# Adjust the model
+sex.scalar2 <- sem(model = onefactor, data = BBQ_corr_sex, 
+                   estimator = "WLSMV", group.equal = c("loadings", "intercepts"), 
+                   group = "sex", 
+                   group.partial = c("friends_and_friendship ~ 1", 
+                                     "view_on_life ~ 1",
+                                     "creativity ~1",
+                                     "leisure_time ~1"))
+
+sex.scalar2 %>% summary(fit.measures=T)
+# Model comparison
+compareFit(sex.metric, sex.scalar2) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+
+# adusting for view of self does not improve model fit
+
+sex.strict <- sem(model = onefactor, data = BBQ_corr_sex, 
+                  estimator = "WLSMV", 
+                  group.equal = c("loadings", "intercepts", "residuals"), 
+                  group = "sex", 
+                  group.partial = c("friends_and_friendship ~ 1", 
+                                    "view_on_life ~ 1",
+                                    "creativity ~1",
+                                    "leisure_time ~1"))
+
+# Model comparison
+compareFit(sex.scalar2, sex.strict) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+# strict scalar invariance was established for the BBQ
+
+# Aggregate model comparison
+compareFit(sex.config, sex.metric, sex.scalar2, sex.strict) %>% summary()
+
+
+compareFit(sex.config, sex.metric, sex.scalar2, sex.strict, moreIndices = TRUE, nested = T) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+
+sex.scalar2 %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# delta metric scalar 1 sex
+.974-.965
+
+## Clinical - Subclinical groups -----------------------------------------------
+
+# PHQ: preprocessing 
+# 
+# ds$PHQ <- ifelse(ds$`PHQ-9|SUM` >= 10, "Clinical Depression", "Subclinical Depression")
+# 
+# describe(ds$PHQ)
+# 
+# 
+# # GAD: preprocessing 
+# 
+# ds$GAD <- ifelse(ds$`GAD-7|SUM` >= 8, "Clinical Anxiety", "Subclinical Anxiety")
+# 
+# describe(ds$GAD)
+# 
+# 
+# BBQ_corr$PHQ <- ds$PHQ
+# 
+# BBQ_corr$GAD <- ds$GAD
+
+# ------------------------------------------------------------------------------
+
+
+# PHQ --------------------------------------------------------------------------
+
+# fit a one factor model corrected for *PHQ*
+
+phq.config <- sem(model = onefactor, data = BBQ_corr, 
+                  estimator = "WLSMV", group = "PHQ")
+
+# display the results. Standardised = TRUE gives beta values (std.all column)
+phq.config %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Metric invariance: phq -------------------------------------------------------
+
+# fit a one factor model corrected for *phq*
+phq.metric <- sem(model = onefactor, data = BBQ_corr, 
+                  estimator = "WLSMV", group.equal = "loadings", 
+                  group = "PHQ")
+
+phq.metric %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(phq.config, phq.metric) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+# Chisquire test not significant => 
+# this is evidence of metric invariance across depression groups
+
+# delta CFI
+
+
+# Scalar invariance: phq -------------------------------------------------------
+phq.scalar <- sem(model = onefactor, data = BBQ_corr, 
+                  estimator = "WLSMV", group.equal = c("loadings", "intercepts"), 
+                  group = "PHQ")
+
+phq.scalar %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(phq.metric, phq.scalar) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+# Chisquire test is significant => 
+# this is evidence of scalar variance across depressive symptom severity groups
+
+0.961-0.948
+
+# Partial MI: phq -----------
+lavTestScore(phq.scalar)
+# influenceal paramaters:
+#  .p2. == .p22. => "f1 =~ view_on_life" ==> is measured by: p=0.016
+#  .p3. == .p23. => "f1 =~ creativity" ==> is measured by: p=0.002
+#  .p16. == .p36. => "creativity ~1" ==> intercept: p=0.000
+#  .p18. == .p38. => "friends_and_friendship ~1" ==> intercept: p=0.002 
+#  .p19. == .p39. => "view_of_self ~1" ==> intercept : p=0.000
+
+parTable(phq.scalar)
+
+
+# Adjust the model
+phq.scalar2 <- sem(model = onefactor, data = BBQ_corr, 
+                   estimator = "WLSMV", group.equal = c("loadings", "intercepts"), 
+                   group = "PHQ", 
+                   group.partial = c("friends_and_friendship ~1", 
+                                     "view_of_self ~1",
+                                     "creativity ~1"))
+
+phq.scalar2 %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(phq.metric, phq.scalar2) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+
+
+# strict invariance 
+phq.strict <- sem(model = onefactor, data = BBQ_corr, 
+                  estimator = "WLSMV", 
+                  group.equal = c("loadings", "intercepts", "residuals"),
+                  group = "PHQ", 
+                  group.partial = c("friends_and_friendship ~1", 
+                                    "view_of_self ~1",
+                                    "creativity ~1"))
+                  
+phq.strict %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(phq.scalar2, phq.strict) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+# strict scalar invariance wasestablished for the BBQ across depression
+
+# Aggregate model comparison
+compareFit(phq.config, phq.metric, phq.scalar2, phq.strict) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+
+## -----------------------------------------------------------------------------
+
+
+# GAD --------------------------------------------------------------------------
+
+# fit a one factor model corrected for *GAD*
+
+gad.config <- sem(model = onefactor, data = BBQ_corr, 
+                  estimator = "WLSMV", group = "GAD")
+
+# display the results. Standardised = TRUE gives beta values (std.all column)
+gad.config %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Metric invariance: gad -------------------------------------------------------
+
+# fit a one factor model corrected for *gad*
+gad.metric <- sem(model = onefactor, data = BBQ_corr, 
+                  estimator = "WLSMV", 
+                  group.equal = "loadings", 
+                  group = "GAD")
+
+gad.metric %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(gad.config, gad.metric) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+# Chisquire test not significant => 
+# this is evidence of metric invariance across anxiety groups
+
+
+# Scalar invariance: gad -------------------------------------------------------
+gad.scalar <- sem(model = onefactor, data = BBQ_corr, 
+                  estimator = "WLSMV", 
+                  group.equal = c("loadings", "intercepts"), 
+                  group = "GAD")
+
+gad.scalar %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(gad.metric, gad.scalar) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+# Chisquire test is significant => 
+# this is evidence of scalar variance across depressive symptom severity groups
+
+
+# Partial MI: gad -----------
+lavTestScore(gad.scalar)
+# influenceal paramaters:
+#  .p3. == .p23. => "f1 =~ creativity" ==> is measured by: p=0.034
+#  .p14. == .p34. => "leisure_time ~1" ==> intercept: p=0.010
+#  .p15. == .p35. => "view_on_life ~1" ==> intercept: p=0.010
+#  .p18. == .p38. => "friends_and_friendship ~1" ==> intercept: p=0.000 
+#  .p19. == .p39. => "view_of_self ~1" ==> intercept : p=0.001
+
+parTable(gad.scalar)
+
+
+# Adjust the model
+gad.scalar2 <- sem(model = onefactor, data = BBQ_corr, 
+                   estimator = "WLSMV", 
+                   group.equal = c("loadings", "intercepts"), 
+                   group = "GAD", 
+                   group.partial = c("friends_and_friendship ~1", 
+                                     "view_of_self ~1",
+                                     "view_on_life ~1",
+                                     "leisure_time ~1"))
+
+gad.scalar2 %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(gad.metric, gad.scalar2) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+
+# stirct invariance 
+
+gad.strict <- sem(model = onefactor, 
+                  data = BBQ_corr, 
+                  estimator = "WLSMV", 
+                  group.equal = c("loadings", "intercepts", "residuals"),
+                  group = "GAD",
+                  group.partial = c("friends_and_friendship ~1", 
+                                    "view_of_self ~1",
+                                    "view_on_life ~1",
+                                    "leisure_time ~1"))
+
+gad.strict %>% summary(standardized=TRUE, ci=TRUE, fit.measures=TRUE)
+
+# Model comparison
+compareFit(gad.scalar2, gad.strict) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+# strict  invariance was established for the BBQ across anxiety
+
+# Aggregate model comparison
+compareFit(gad.config, gad.metric, gad.scalar2, gad.strict) %>% 
+  summary(fit.measures = c("cfi", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+
+
+
+## --------------------------------------
+
+
+# internal reliability ---------------------------------------------------------
+
+## BBQ
+BBQ_corr[, c(1:6)] %>% alpha()
+
+## PHQ-9
+phq <- ds[, c(26:34)] 
+phq %>% alpha()
+
+## GAD-7
+gad <- ds[, c(36:42)]
+gad %>% alpha()
+
+## -----------------------------------------------------------------------------
+
+# descritpve sample statsitics for the scale -----------
+
+BBQ_corr$age_corr %>% table()
+
+BBQ_corr_sex$sex %>% table()
+
+BBQ_corr$PHQ %>% table()
+
+BBQ_corr$GAD %>% table()
+
+
+# descriptive statsitics 
+ds$Treatment_Group_2 <- fct_collapse(ds$Treatment_Group,
+                                     Treatment = c("WL-8w-no_f",
+                                                   "WL-8w_f",
+                                                   "WL-16w_no_f",
+                                                   "WL-16w_f",
+                                                   "AP-8w_no_f",
+                                                   "AP-8w_f",
+                                                   "AP-16w_no_f",
+                                                   "AP-16w_f",
+                                                   "UP-8w_no_f",
+                                                   "UP-8w_f",
+                                                   "UP-16w_no_f",
+                                                   "UP-16w_f"),
+                                     Excluded = "Excluded")
+
+BBQ_corr <- BBQ_corr %>% 
+  filter(!is.na(age))
+
+
+library(gtsummary)
+
+ds %>% 
+  filter(!is.na(ageN)) %>% 
+  select(Treatment_Group_2, ageN, edu, Sex, SES, 
+             Children_u18, Meds, Occupation, `PHQ-9|SUM`,`GAD-7|SUM`, `BBQ|SUM`) %>% 
+  tbl_summary(statistic = list(all_continuous() ~ "{mean} ({sd}) [{min}-{max}]"), digits = list(all_categorical() ~ 1))
+
+
+
+
+## correlational plots ---------------------------------------------------------
+
+library(corrplot)
+
+# Correlation matrix of items
+cormat <- BBQ_corr[, c(1:6)] %>% cor()
+
+# Correlation matrix plot
+cormat %>% apa.cor.table(filename = "cortable.doc", show.sig.stars = F, landscape = F, 
+                         show.conf.interval = F)
+colnames(cormat) <- c("Leisure time", "View on life", "Creativity", 
+                      "Learning", "Friends and friendship", "View of self")
+
+rownames(cormat) <- c("Leisure time", "View on life", "Creativity", 
+                      "Learning", "Friends and friendship", "View of self")
+
+corrplot(cormat, method = "number", type = "lower", addCoef.col = 'grey',  
+         col = "black", tl.col = "black", cl.pos = "n")
+
+           #COL2(n = 100, diverging = "RdBu"), rect.col = "black", tl.col = "black")
+
+corrplot(cormat, order = 'AOE', type = 'upper', tl.pos = 'tp')
+corrplot(cormat, add = F, type = 'lower', method = 'number', order = 'AOE',
+         col = 'black', diag = FALSE, tl.pos = 'n', cl.pos = 'n')
+
+corrplot.mixed(cormat, tl.pos = "l")
+
+
+
+# cut-off analysis ----
+
+BBQ_corr$BBQ_sum = BBQ_corr$leisure_time + BBQ_corr$view_on_life + BBQ_corr$creativity + 
+                   BBQ_corr$learning +  BBQ_corr$friends_and_friendship + BBQ_corr$view_of_self
+
+BBQ_corr %>%  psych::describe()
+
+BBQ_cutoff <- BBQ_corr %>% select(leisure_time, view_on_life, 
+                    creativity, learning, friends_and_friendship, view_of_self, 
+                    PHQ, GAD, BBQ_sum)
+
+describeBy(BBQ_cutoff ~ PHQ +GAD)
+
+describeBy(BBQ_cutoff ~ PHQ)
+describeBy(BBQ_cutoff ~ GAD)
+
+# clinical dep vs non-clinical dep
+TTestA(mx = 32.13, sx = 16.88, nx = 2369, my = 45.16, sy = 17.64, ny = 1032)
+32.13-45.16 
+
+# clinical anx vs non-clinical anx
+TTestA(mx = 33.82, sx = 17.63, nx = 2217, my = 40.32, sy = 18.30, ny = 1184)
+33.82-40.32 
+
+# subclinical dep & clinical anx vs subclincial dep & anx
+TTestA(mx = 45.55, sx = 17.76, nx = 640, my = 44.53, sy = 17.45, ny = 392)
+33.82-40.32 
+
+# clinical dep & clinical anx vs clincial dep & subclincial anx
+TTestA(mx = 31.52, sx = 16.81, nx = 1825, my = 34.16, sy = 16.98, ny = 544)
+33.82-40.32 
+
+
+# ROC
+library(pROC)
+
+
+
+# Greiningin byggist á því að hlutfall sannjákvæðra (TP) sem fall af hlutfalli 
+# falsjákvæðra (FP) mynda samfelldan feril með ákveðnu lagi og eiginleikum
+
+
+# Load necessary packages
+library(pROC)
+
+# Assume 'df' is your data frame and includes 'BBQ|SUM', 'PHQ-9|SUM', and 'GAD-7|SUM'
+# Create a binary outcome based on PHQ-9 and GAD-7
+binary_outcome <- ifelse(ds$`PHQ-9|SUM` >= 10 | ds$`GAD-7|SUM` >= 8, 1, 0)
+
+# Perform ROC analysis
+roc_obj <- roc(binary_outcome, BBQ_corr$BBQ_sum, 
+               ci=T,
+               # arguments for plot
+               plot=TRUE, auc.polygon=F, max.auc.polygon=F, 
+               # grid=TRUE,
+               print.auc=TRUE)
+
+# Get the coordinates for the 'best' cutoff point
+cutoff_coords <- coords(roc_obj, "best", ret=c("threshold", "sensitivity", "specificity"), transpose = FALSE)
+
+# Extract the cutoff value from the coordinates
+cutoff_value <- cutoff_coords["threshold"]
+
+# Add the point to the plot
+points(cutoff_coords["specificity"], cutoff_coords["sensitivity"], col="red", pch=19, cex=1.5)
+
+# Add a label for the point
+text(cutoff_coords["specificity"], cutoff_coords["sensitivity"], labels=sprintf("BBQ cutoff: %s", cutoff_value), pos=4)
+
+BBQ_corr$age %>% summary()
+
+# geyma ---------------
+
+cor(ds$`GAD-7|SUM`, ds$`BBQ|SUM`)
+
+ds %>% describeBy(group = "Treatment_Group")
+
+sum(ds$Treatment_Group == "Excluded")
+
+
+scalecor <- ds[, c(5:7)] %>% cor.plot(stars = T, show.legend = F, main = "") 
+
+
+
+# predict exclusion with BBQ ------------------------
+
+
+
+summary(ds$Treatment_Group_2)
+
+  mylogit <- glm(Treatment_Group_2 ~ `BBQ|SUM` + 
+                 # `PHQ-9|SUM` + `GAD-7|SUM` +
+                 age + SES + Marital_Stat, data = ds, family = "binomial")
+
+summary(mylogit)
+
+exp(cbind(OR = coef(mylogit), confint(mylogit)))
+
+effectsize::convert_oddsratio_to_d(OR = 0.9887, )
+
+confint(mylogit)
