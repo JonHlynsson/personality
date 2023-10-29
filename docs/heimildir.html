@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Ísak Örn Ívarsson og Jón Ingi Hlynsson" />
 
 
-<title>enskuslides.knit</title>
+<title>Heimildir</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +30,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -58,28 +62,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-/* for pandoc --citeproc since 2.11 */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="default.css" type="text/css" />
 
@@ -243,6 +225,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -250,6 +295,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -352,35 +407,78 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">Heimildir</h1>
+<h4 class="author">Ísak Örn Ívarsson og Jón Ingi Hlynsson</h4>
 
 </div>
 
 
-<p><img src="images/Hlynsson/Banner.jpg" /></p>
-<div id="lífeðlisfræðilegar-undirstöður-úthverfu-og-taugaveiklunnar"
-class="section level1">
-<h1>Lífeðlisfræðilegar undirstöður úthverfu og taugaveiklunnar</h1>
-<iframe src="https://drive.google.com/file/d/1-0K3-LYrCVJFOR9BNq7dT7F2P9h08Yr0/preview?showcase=0" width="672" height="800" data-external="1">
-</iframe>
-<div id="glærur" class="section level2">
-<h2>Glærur</h2>
-<iframe src="https://drive.google.com/file/d/1whtywhTXWTdLMn0-a8tz5hLvU5JoIP0e/preview?showcase=0" width="672" height="400px" data-external="1">
-</iframe>
-<p><br><br><br><br><br><br><br><br></p>
+<p>Hérna eru heimildir fyrir þeim tölfræðiforritum sem þið gætuð verið
+að nota í þessu námskeiði. Athugið að þessar heimildir <strong>telja
+ekki</strong> til heildarfjölda heimilda í verkefninu. Að vísa í
+tölfræðiforrit, pakka fyrir t.d. R og annan hugbúnað heyrir undir góð
+vinnubrögð (best practices!).</p>
+<div id="fyrir-spss" class="section level3">
+<h3>Fyrir SPSS:</h3>
+<p><a
+href="https://www.ibm.com/support/pages/how-cite-ibm-spss-statistics-or-earlier-versions-spss">Smella
+hér ef þú ert að nota SPSS!</a></p>
+<div id="tilvísun-í-texta" class="section level4">
+<h4>Tilvísun í texta:</h4>
+<p>(IBM, 2016)</p>
+</div>
+<div id="heimildaskrá" class="section level4">
+<h4>Heimildaskrá</h4>
+<p>IBM. (2016). <em>IBM SPSS Statistics for Windows</em> (útgáfa 24.0).
+[Hugbúnaður]. IBM Corp. <a
+href="https://www.ibm.com/products/spss-statistics"
+class="uri">https://www.ibm.com/products/spss-statistics</a></p>
 </div>
 </div>
-<div id="heimildir" class="section level1">
-<h1>Heimildir</h1>
-<div id="refs">
+<div id="fyrir-jamovi" class="section level3">
+<h3>Fyrir Jamovi:</h3>
+<div id="tilvísun-í-texta-1" class="section level4">
+<h4>Tilvísun í texta</h4>
+<p>(The jamovi project, 2023)</p>
+</div>
+<div id="heimildaskrá-1" class="section level4">
+<h4>Heimildaskrá</h4>
+<p>The jamovi project (2023). <em>jamovi</em> (útgáfa 2.3).
+[Hugbúnaður]. <a href="https://www.jamovi.org"
+class="uri">https://www.jamovi.org</a></p>
+</div>
+</div>
+<div id="fyrir-jasp" class="section level3">
+<h3>Fyrir JASP:</h3>
+<div id="tilvísun-í-texta-2" class="section level4">
+<h4>Tilvísun í texta</h4>
+<p>(JASP Team, 2023)</p>
+</div>
+<div id="heimildaskrá-2" class="section level4">
+<h4>Heimildaskrá</h4>
+<p>JASP Team. (2023). <em>JASP</em> (útgáfa 0.18.1). [Hugbúnaður]. <a
+href="https://jasp-stats.org" class="uri">https://jasp-stats.org</a></p>
+</div>
+<div id="fyrir-r-studio" class="section level4">
+<h4>Fyrir R studio:</h4>
+</div>
+<div id="tilvísun-í-texta-3" class="section level4">
+<h4>Tilvísun í texta</h4>
+<p>(R Core Team, 2023)</p>
+</div>
+<div id="heimildaskrá-3" class="section level4">
+<h4>Heimildaskrá</h4>
+<p>R Core Team. (2023). <em>R: A language and environment for
+statistical computing.</em> [Hugbúnaður]. <a
+href="https://www.R-project.org/"
+class="uri">https://www.R-project.org/</a></p>
+</div>
+</div>
+
+
 
 </div>
-<hr>
-<p>&#169; Jon Ingi Hlynsson - Síðasta breyting átti sér stað:
-2023-10-29</p>
 </div>
-
-
-
 
 </div>
 
@@ -413,6 +511,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

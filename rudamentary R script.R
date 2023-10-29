@@ -47,6 +47,8 @@ options(digits=4) #Number of digits in output
 
 d <- read_sav(file = "sameinad2023.sav")
 
+
+
 hexaco <- d[, c(321:380)]
 
 omega(hexaco, nfactors = 6)
