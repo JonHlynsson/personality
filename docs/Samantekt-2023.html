@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2023-11-02" />
+
+<title>Samantekt fyrir rannsóknarskýrslu</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="default.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">SÁL320G Persónuleikasálfræði</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Forsíða
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-archive"></span>
+     
+    Námsgögn
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Rannsóknarverkefni.html">
+        <span class="fa fa-empire"></span>
+         
+        Verkefnalýsing
+      </a>
+    </li>
+    <li>
+      <a href="https://bokasafn.ru.is/apa/heim">
+        <span class="fa fa-clipboard-list"></span>
+         
+        APA heimildaskráning
+      </a>
+    </li>
+    <li>
+      <a href="https://www.ru.is/media/skjol---bokasafn/APA-flytilykill.pdf">
+        <span class="fa fa-clipboard-list"></span>
+         
+        Flýtilykill APA heimildaskráningar
+      </a>
+    </li>
+    <li>
+      <a href="enskuslides.html">
+        <span class="fa fa-link"></span>
+         
+        Lífeðlisfræðilegar undirstöður úthverfu og taugaveiklunnar
+      </a>
+    </li>
+    <li>
+      <a href="https://bokasafn.ru.is/zotero">
+        <span class="fa fa-school"></span>
+         
+        Leiðbeiningar fyrir Zotero
+      </a>
+    </li>
+    <li>
+      <a href="MI.html">
+        <span class="fa fa-calculator"></span>
+         
+        Meðaltals tilreikningur (e. mean imputation)
+      </a>
+    </li>
+    <li>
+      <a href="heimildir.html">
+        <span class="fas fa-archway"></span>
+         
+        Heimildir fyrir tölfræðiforritum
+      </a>
+    </li>
+    <li>
+      <a href="Samantekt-2023.html">
+        <span class="fa fa-anchor"></span>
+         
+        Gagnleg ráð í ritun rannsóknaskýrslu (2023)
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="hlekkir-a-glaerur.html">
+    <span class="fa fa-film"></span>
+     
+    Glærur
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Samantekt fyrir rannsóknarskýrslu</h1>
+<h4 class="date">2023-11-02</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#almenn-ráð-um-skýrsluskrif"
+id="toc-almenn-ráð-um-skýrsluskrif">Almenn ráð um skýrsluskrif</a></li>
+<li><a href="#rannsóknarverkefni-í-persónuleikasálfræði"
+id="toc-rannsóknarverkefni-í-persónuleikasálfræði">Rannsóknarverkefni í
+Persónuleikasálfræði</a>
+<ul>
+<li><a href="#ráðleggingar-fyrir-inngang"
+id="toc-ráðleggingar-fyrir-inngang">Ráðleggingar fyrir inngang</a>
+<ul>
+<li><a href="#þýðingar-á-enskum-akademískum-orðum"
+id="toc-þýðingar-á-enskum-akademískum-orðum">Þýðingar á enskum
+akademískum orðum</a></li>
+<li><a href="#tilgáturnar" id="toc-tilgáturnar">Tilgáturnar</a></li>
+<li><a href="#ráðleggingar-fyrir-framkvæmd"
+id="toc-ráðleggingar-fyrir-framkvæmd">Ráðleggingar fyrir
+<strong>framkvæmd</strong></a></li>
+</ul></li>
+<li><a href="#hvernig-á-ég-að-hugsa-um-þann-sem-les-yfir-verkefnið-mitt"
+id="toc-hvernig-á-ég-að-hugsa-um-þann-sem-les-yfir-verkefnið-mitt">Hvernig
+á ég að hugsa um þann sem les yfir verkefnið mitt?</a>
+<ul>
+<li><a href="#ráðleggingar-fyrir-niðurstöður"
+id="toc-ráðleggingar-fyrir-niðurstöður">Ráðleggingar fyrir
+<strong>niðurstöður</strong></a></li>
+<li><a href="#ráðleggingar-fyrir-umræðu"
+id="toc-ráðleggingar-fyrir-umræðu">Ráðleggingar fyrir
+<strong>umræðu</strong></a></li>
+<li><a href="#heimildir" id="toc-heimildir">Heimildir</a></li>
+</ul></li>
+<li><a href="#apa-skýrslur" id="toc-apa-skýrslur">APA skýrslur</a>
+<ul>
+<li><a href="#akademísk-textasmíði"
+id="toc-akademísk-textasmíði">Akademísk textasmíði</a></li>
+<li><a href="#gagnrýni-í-textasmíði"
+id="toc-gagnrýni-í-textasmíði">Gagnrýni í textasmíði</a></li>
+<li><a href="#apa-7-nemendaverkefni" id="toc-apa-7-nemendaverkefni">APA
+7 nemendaverkefni</a></li>
+<li><a href="#hvernig-eiga-headings-að-vera-settir-fram-í-apa"
+id="toc-hvernig-eiga-headings-að-vera-settir-fram-í-apa">Hvernig eiga
+Headings að vera settir fram í APA</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#spurningar-um-fyrirlesturinn-ykkar"
+id="toc-spurningar-um-fyrirlesturinn-ykkar">Spurningar um fyrirlesturinn
+ykkar?</a></li>
+<li><a href="#samantekt-unnin-úr-spurningum-sem-nemendur-hafa-borið-upp"
+id="toc-samantekt-unnin-úr-spurningum-sem-nemendur-hafa-borið-upp">Samantekt
+unnin úr spurningum sem nemendur hafa borið upp</a>
+<ul>
+<li><a href="#varðandi-textaumfjöllun-um-skorun-breyta"
+id="toc-varðandi-textaumfjöllun-um-skorun-breyta">Varðandi
+textaumfjöllun um skorun breyta</a></li>
+<li><a
+href="#hvernig-lýsi-ég-þá-þátttakendum-á-undirkaflanum-þátttakendur"
+id="toc-hvernig-lýsi-ég-þá-þátttakendum-á-undirkaflanum-þátttakendur">Hvernig
+lýsi ég þá þátttakendum á undirkaflanum
+<strong>Þátttakendur</strong>?</a></li>
+<li><a href="#hvort-á-ég-að-nota-t-próf-eða-fylgnipróf"
+id="toc-hvort-á-ég-að-nota-t-próf-eða-fylgnipróf">Hvort á ég að nota
+t-próf eða fylgnipróf?</a></li>
+<li><a href="#það-er-villa-í-rosenberg-kvarðanum"
+id="toc-það-er-villa-í-rosenberg-kvarðanum">Það er villa í Rosenberg
+kvarðanum!</a></li>
+</ul></li>
+<li><a href="#free-rides-eru-ekki-í-boði"
+id="toc-free-rides-eru-ekki-í-boði">“Free-rides” eru ekki í
+boði!</a></li>
+</ul>
+</div>
+
+<p>Við mælum með því að lesa þetta skjal <strong>afar vel</strong>. Við
+höfum safnað saman öllum þeim helstu upplýsingum sem við teljum að sé
+brýnt að ítreka fyrir skilin. <strong>Athugið að þetta er lifandi
+skjal</strong> og gæti því tekið smávægilegum breytingum eftir því sem
+nær dregur skilum. <strong>Þið getið séð hvenær skjalið var síðast
+uppfært neðst í skjalinu</strong>. Við höfum gengið úr skugga um að
+<strong>ef einhver breyting á sér stað</strong> þá uppfærist
+dagsetningin sem er neðst <strong>sjálfkrafa</strong>.</p>
+<div id="almenn-ráð-um-skýrsluskrif" class="section level1">
+<h1>Almenn ráð um skýrsluskrif</h1>
+<p><a
+href="https://docs.google.com/document/d/1wY43OLAcqSgPXThuXXPUJX7DPe4GMhSI/edit?usp=sharing&amp;ouid=101348460249919801545&amp;rtpof=true&amp;sd=true">Smelltu
+hér</a> til þess að skoða ítarlegar leiðbeiningar um hvernig megi skrifa
+sem besta ritgerð. Ráðleggingarnar þarna má finna eiga við fleiri kúrsa
+en Persónuleikasálfræði og væri gagnlegt fyrir ykkur að lesa!</p>
+<p>Markmið verkefna sem þessa er að þjálfast í að skrifa akademískar
+skýrslur. Þetta er þemað í flestum áföngum í sálfræðideild.</p>
+<p>Hafið í huga að skýrslan á að vera eins skýr og unnt er. <strong>Ekki
+nota óþarfa akademískt jargon</strong>. Þið eigið að nota akademískt
+málfar og viðeigandi orðfæri (t.d. eins og finna má á glærum í
+fyrirlestrum ykkar).</p>
+<p>Hér má sjá fyrirlestur (á ensku) um hvers vegna ritun og textasmíði
+eru mikilvægir þættir í námi allra. (ATH. Hljóðið er fremur lágt svo að
+það þarf að hækka þónokkuð í hátölurum).</p>
+<iframe width="600" height="350" src="https://www.youtube.com/embed/aOsZdq6wft4" title="Omniglot AB Lecture Series: Writing Skills" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+</iframe>
+</div>
+<div id="rannsóknarverkefni-í-persónuleikasálfræði"
+class="section level1">
+<h1>Rannsóknarverkefni í Persónuleikasálfræði</h1>
+<p>Þið eruð að skrifa rannsóknarskýrslu um persónuleikaþætti sem á að
+vera í samræmi við APA 7 staðalinn. Við höfum þegar útbúið <a
+href="https://github.com/JonHlynsson/personality/raw/main/APA%20sni%C3%B0m%C3%A1t/01_apa_styll_snidmat.docx"><strong>sniðmát</strong></a>
+fyrir ykkur til þess að styðjast við. Þó að það sé ekki skylda að nota
+það, þá mælum við eindregið með því að þið gerið það! Sniðmátið er í
+samræmi við APA 7 leiðbeiningar og fyrir vikið væri sérkennilegt ef að
+verkefnið ykkar er markvert frábrugðið uppsetningunni sem finna má í
+sniðmátinu.</p>
+<p>Hér má sjá mynd sem sýnir dæmigerðar leiðbeiningar um
+skýrsluskrif.</p>
+<p><img src="images/flow.png" width="40%" /></p>
+<div id="ráðleggingar-fyrir-inngang" class="section level2">
+<h2>Ráðleggingar fyrir inngang</h2>
+<p>Í inngangi erum við á höttunum eftir því að þið samþættið (e.
+synthesize) litteratúrinn og <strong>talið um hugsmíðar</strong>. Takið
+afstöðu og rökstyðjið hana, þ.e. sýnið okkur skilning ykkar á því efni
+sem um ræðir hverju sinni.</p>
+<p>Það á ekki að vera neitt yfirheiti á inngangskaflanum!</p>
+<div id="þýðingar-á-enskum-akademískum-orðum" class="section level3">
+<h3>Þýðingar á enskum akademískum orðum</h3>
+<p>Guðmundur Arnkelsson gaf út bók sem heitir <strong>Orðgnótt</strong>,
+í henni eru flestöll algeng hugtök á íslensku í sálfræði.</p>
+<p>Til aukreitis við <strong>Orðgnótt</strong>, þá mælum við með <a
+href="https://idordabanki.arnastofnun.is/">íðorðabankanum</a> og <a
+href="https://snara.is/">Snöru</a>.</p>
+</div>
+<div id="tilgáturnar" class="section level3">
+<h3>Tilgáturnar</h3>
+<p>Mikilvægt að rökstyðja tilgáturnar ykkar – af hverju haldið það að X
+sé að fara gerast? – stundum er gott að hugsa um rassálfana úr <em>Ronju
+ræningjadóttur</em>. ### Ráðleggingar fyrir <strong>mælitæki</strong>
+Lýsa öllum þeim mælitækjum sem voru notuð. Þar á meðal skal tiltaka
+skorun breyta, heildarskor, spönn, innri áreiðanleika og svo
+framvegis.</p>
+</div>
+<div id="ráðleggingar-fyrir-framkvæmd" class="section level3">
+<h3>Ráðleggingar fyrir <strong>framkvæmd</strong></h3>
+<p>Lýsa framkvæmdinni þannig að einhver annar geti gert það sama og þið
+gerið. <strong>Nákvæmni</strong> er aðalatrið hér.</p>
+</div>
+</div>
+<div id="hvernig-á-ég-að-hugsa-um-þann-sem-les-yfir-verkefnið-mitt"
+class="section level2">
+<h2>Hvernig á ég að hugsa um þann sem les yfir verkefnið mitt?</h2>
+<p>Munið að í öllum nemendaverkefnum er ykkar hlutverk að sannfæra
+kennarann um að þið skiljið efnið.</p>
+<p>Það getur því verið gagnlegt að ímynda sér að sá sem les yfir haldi
+að þið vitið ekki hvað þið eruð að tala um og að ykkar hlutverk sé að
+sannfæra yfirlesarann um að það sé rangt.</p>
+<div id="ráðleggingar-fyrir-niðurstöður" class="section level3">
+<h3>Ráðleggingar fyrir <strong>niðurstöður</strong></h3>
+<p><a
+href="https://apastyle.apa.org/style-grammar-guidelines/tables-figures">Smelltu
+hér</a> til þess að skoða leiðbeiningar um hvernig skuli birta töflur og
+myndir.</p>
+<div id="t-próf-og-fylgni" class="section level4">
+<h4>T-próf og fylgni</h4>
+<p>Hafið í huga að þið þurfið að greina frá tölfræðiniðurstöðum í
+samræmi við APA leiðbeiningar. Þið getið til dæmis skoðað <a
+href="www.gba.is">www.gba.is</a> til þess að fá upplýsingar um
+framsetningu tölfræðiniðurstaðna.</p>
+</div>
+<div id="varðandi-áhrifastærðir-e.-effect-sizes" class="section level4">
+<h4><strong>Varðandi áhrifastærðir (e. <em>effect
+sizes</em>)</strong></h4>
+<p>Áhrifastæð er gildi sem mælir styrkleika sambands milli tveggja
+breyta í þýði með því að leggja mat á stærð sambandsins í úrtaki. Dæmi
+um áhrifastærðir eru fylgni milli tveggja breyta (Pearson’s <em>r</em>),
+Cohen’s d, skýringarhlutfall og áhættuhlutfall (þ.e. hætta á að
+tiltekinn atburður [t.d. hjartaáfall] gerist.</p>
+<p>Það má umbreyta áhrifastæðum frá einu formi yfir í annað. Til dæmis
+má breyta fylgnistuðli yfir í skýringarhlutfall eða Cohen’s d. <a
+href="https://www.escal.site/">Smelltu hér</a> til þess að opna vefsíðu
+sem gerir það á einfaldan máta.</p>
+</div>
+<div id="hvernig-túlka-ég-áhrifastærð" class="section level4">
+<h4>Hvernig túlka ég áhrifastærð?</h4>
+<p>Höfum í huga að það skal <strong>ekki</strong> nota viðmið Cohen’s
+þegar að áhrifastærð er túlkuð. Cohen giskaði á hvaða áhrifastærð væri
+lítil, miðlungs og stór.</p>
+<p>Hins vegar sýndi James F. Hemphill (2003) að þessi ágiskun Cohen’s
+kæmi <strong>ekki</strong> heim og saman við niðurstöður raunvísra
+rannsókna. <strong>Fyrir vikið skal nota viðmið Hemphill’s þegar
+áhrifastæð er túlkuð</strong>.</p>
+<p><strong>Hér má sjá mynd úr grein hans</strong></p>
+<p><img src="images/hemphill.png" width="100%" /></p>
+<p><a
+href="https://www.researchgate.net/publication/10822415_Interpreting_the_Magnitude_of_Correlation_Coefficients">Smellið
+hér</a> til þess að lesa grein Hemphill (2003).</p>
+</div>
+<div id="hvers-vegna-þurfum-við-að-nota-áhrifastærð"
+class="section level4">
+<h4>Hvers vegna þurfum við að nota áhrifastærð?</h4>
+<p>Áhrifastærðir eru viðbót við tölfræðilegar tilgátuprófanir og gegna
+mikilvægu hlutverki í að meta <strong>power</strong> svo unnt sé að meta
+stærð úrtaks sem þarf til ef sýna á fram á marktækan mun í úrtaki milli
+tveggja eða fleiri breyta (sé hann til staðar í þýði), eru mikilvægar í
+safngreiningum.</p>
+<p><strong>Áhrifastæðir nauðsynlegar til þess að túlka niðurstöður á
+merkingarbæran máta</strong>.</p>
+</div>
+</div>
+<div id="ráðleggingar-fyrir-umræðu" class="section level3">
+<h3>Ráðleggingar fyrir <strong>umræðu</strong></h3>
+<p>Það er einhver mýta meðal nemenda að það megi ekki minnast á nýjar
+heimildir í umræðu. <strong>Það er rangt</strong>. Ef að tengsl milli
+hugsmíða eru á skjön við það sem þið sáuð fyrir ykkur í upphafi
+rannsóknar, þá er eðlilegt að tefla fram nýjum heimildum sem geta gert
+grein fyrir því hvers vegna það kunni að vera.</p>
+<ul>
+<li>Muna að tiltaka vankanta rannsóknarinnar.</li>
+<li>Muna að tala um einhverja <strong>kosti</strong>!</li>
+<li>Muna að leggja til hvernig megi betrumbæta rannsóknina með
+framhaldsrannsóknum.
+<ul>
+<li>Þá er <strong>ekki</strong> nóg að einfaldlega segja að nota þurfi
+“flóknari” tölfræðiaðgerðir. Rakhnífur Occam gildir í vali á
+tölfræðiaðgerðum líkt og í skýringum á hegðun.</li>
+</ul></li>
+</ul>
+</div>
+<div id="heimildir" class="section level3">
+<h3>Heimildir</h3>
+<div id="hversu-margar-heimildir-á-ég-að-nota" class="section level4">
+<h4>Hversu margar heimildir á ég að nota?</h4>
+<p>Verkefnalýsingin segir a.m.k. 15 heimildir. Þar að auki viljum við að
+þið vísið í það tölfræðiforrit sem þið notið. <a
+href="https://jonhlynsson.github.io/personality/heimildir.html">Smelltu
+hér</a> til þess að sjá hvernig skal vísa í tölfræðiforrit.</p>
+<p><a
+href="https://apastyle.apa.org/style-grammar-guidelines/citations/appropriate-citation">Smelltu
+hér</a> til þess að skoða hvað telst sem viðeigandi magn heimilda.</p>
+</div>
+<div
+id="gagnleg-ráð-frá-apa-um-heimildaskráningu-við-mælum-með-því-að-skoða-þetta-vel"
+class="section level4">
+<h4>Gagnleg ráð frá APA um heimildaskráningu (<strong>Við mælum með því
+að skoða þetta VEL</strong>)</h4>
+<p><a
+href="https://apastyle.apa.org/instructional-aids/in-text-citation-checklist.pdf">Smelltu
+hér</a> fyrir tékklista um hvernig skuli bera sig að þegar vísað er í
+heimildir.</p>
+<p><a
+href="https://apastyle.apa.org/instructional-aids/six-steps-proper-citation.pdf">Smelltu
+hér</a> til þess að skoða þau skref sem bera þarf að fylgja við
+heimildanotkun.</p>
+</div>
+</div>
+</div>
+<div id="apa-skýrslur" class="section level2">
+<h2>APA skýrslur</h2>
+<p>Hér má sjá gamalt vídjó sem þar sem ég útlista hvernig skuli bera sig
+að í ritun skýrsla í tölfræði, hvernig íslensk aðlögun fyrir APA stíl 7.
+útgáfu lítur út í praxís og leiðbeiningar fyrir SPSS.</p>
+<iframe width="600" height="350" src="https://www.youtube.com/embed/W7C9ClN4wyc" title="Íslenskar APA reglur og t-próf í SPSS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+</iframe>
+<div id="akademísk-textasmíði" class="section level3">
+<h3>Akademísk textasmíði</h3>
+<p>Passið samræmi í setningaskipan og <strong>ekki gleyma rauða
+þræðinum</strong>. Þið getið hugsað skrif sem þessi á eftirfarandi máta:
+- Hvert og eitt orð í setningu á að vera í röklegu samhengi við
+setninguna í heild og koma heim og saman við þema setningarinnar. - Hver
+og ein setning í efnisgrein á að vera í röklegu samhengi við aðrar
+setningar í efnisgreininni og koma heim og saman við þemað í
+efnisgreininni í heild sem og undirkaflann sem hún tilheyrir. - Reglan
+með fjölda orða í efnisgreinum er að efnisgrein skal innihalda 145 orð ±
+15 orð. - Hver efnisgrein (að öllu öðru óbreyttu) ætti bara að fjalla um
+eitthvað <strong>eitt</strong>. - Hver og einn undirkafli á að vera í
+röklegu samhengi við þann yfirkafla sem hann tilheyrir. - Hver og einn
+yfirkafli á að vera í röklegu samhengi við ritgerðina í heild.</p>
+<p>Þegar þið eruð búin að ganga úr skugga um að allt ofangreint kemur
+heim og saman við almenna skynsemi, þá skal <strong>leggja heildrænt mat
+á textann</strong> og laga með tilliti til flæðis. Með öðrum orðum,
+<strong>ekki gleyma rauða þræðinum sem á að leiða lesandann í gegnum
+ritgerðina ykkar!!!</strong></p>
+<p><strong>Dæmisaga</strong><br />
+Eitt sinn var kennari við deildina sem rammaði inn rauðan þráð úr garni
+og hengdi upp á vegg á skrifstofu sinni. Aðspurður um hvað þetta væri
+sagði hann að <strong>þetta væri rauði þráðurinn sem vantaði alltaf í
+verkefni nemenda</strong>.</p>
+<blockquote>
+<p>Academic writing is all about rewriting!</p>
+</blockquote>
+<p>Að endurskrifa texta er eitt af því sem einkennir nemendur sem fá háa
+einkunn.</p>
+</div>
+<div id="gagnrýni-í-textasmíði" class="section level3">
+<h3>Gagnrýni í textasmíði</h3>
+<p>Ekki bara lýsa rannsóknum og niðurstöðum þeirra í inngagni. Samþættið
+niðurstöður margra rannsókna í stað þess að telja upp rannsóknir.</p>
+<p>Hafið líka í huga að það er ekki síður mikilvægt að benda lesendum á
+rannsóknir og niðurstöður sem ganga í berhögg við þau tengsl sem þið
+teljið (<strong>og niðurstöður raunvísra rannsókna styðja</strong>) að
+séu til staðar. Í rannsóknum er það venjan, fremur en undantekningin, að
+fólk er ósammála um hvernig megi skilgreina hugsmíðar og mæla þær. Fyrir
+vikið væri sérkennilegt ef að allar heimildir ykkar styðji við tilgátu
+ykkar. Að því sögðu má auðvitað gera ráð fyrir því að
+<strong>meginþorri</strong> þeirra heimilda sem þið vísið í styðji við
+tilgátuna ykkar.</p>
+</div>
+<div id="apa-7-nemendaverkefni" class="section level3">
+<h3>APA 7 nemendaverkefni</h3>
+<p><a
+href="https://apastyle.apa.org/instructional-aids/student-paper-setup-guide.pdf">Smelltu
+hér</a> til þess að skoða leiðbeiningar APA um hvernig ásýnd
+nemendaverkefni skuli líta út.</p>
+</div>
+<div id="hvernig-eiga-headings-að-vera-settir-fram-í-apa"
+class="section level3">
+<h3>Hvernig eiga Headings að vera settir fram í APA</h3>
+<p><img src="images/headings.jpg" width="100%" /></p>
+</div>
+</div>
+</div>
+<div id="spurningar-um-fyrirlesturinn-ykkar" class="section level1">
+<h1>Spurningar um fyrirlesturinn ykkar?</h1>
+<p>Skoðum <a
+href="https://haskoliislands.instructure.com/courses/24852/files/2599520?module_item_id=680579">glærurnar</a>
+sem eru á Canvas.</p>
+</div>
+<div id="samantekt-unnin-úr-spurningum-sem-nemendur-hafa-borið-upp"
+class="section level1">
+<h1>Samantekt unnin úr spurningum sem nemendur hafa borið upp</h1>
+<div id="varðandi-textaumfjöllun-um-skorun-breyta"
+class="section level2">
+<h2>Varðandi textaumfjöllun um skorun breyta</h2>
+<p>Þegar við tölum um að tiltaka hvernig skorun breyta fór fram, þá væri
+eftirfarandi texti ágætis dæmi um þá nákvæmni sem við erum á höttunum
+eftir:</p>
+<blockquote>
+<p>Persónuleikaþáttur D (Týpa D) samanstendur tveimur undirþáttum:
+Neikvæð líðan og félagsleg hömlun. Til þess að uppfylla viðmið fyrir
+persónuleikaþáttinn D þurfa skor beggja undirþátta sjálfsmatskvarðans DS
+14 að vera hærri eða jafnt og 10. Við úrvinnslu gagna voru atriðum 1 og
+3 snúið áður en heildarskor hvors þáttar lögð saman. Þátttakendur með
+heildarskor sem var hærra eða jafnt og 10 á báðum undirþáttum flokkunina
+Týpa D og var þannig persónuleikaþáttur D skoraður sem tvíkostabreyta
+(þ.e. “Týpa D” og “Ekki Týpa D).</p>
+</blockquote>
+<ul>
+<li>ATH: Þetta textabrot gerir ráð fyrir því að þú sért þegar búin að
+taka fram spönn listans DS 14 (sem sagt lægsta og hæsta mögulega
+skor).</li>
+<li>ATH: Í þetta textabrot myndi einnig vanta dæmi um spurningu úr
+listanum (t.d. “Ég á auðvelt með að ná sambandi við fólk sem ég hitti”)
+og hver orðagildi svarkvarðans eru (t.d. 0 = Rangt, 1 = Frekar rangt,
+o.s.frv.).</li>
+<li>ATH: Þetta textabrot gefur skýrt til kynna hvernig hópaskiptingu var
+háttað (þ.e. hvort um Týpu D sé að ræða eða ekki).</li>
+</ul>
+</div>
+<div id="hvernig-lýsi-ég-þá-þátttakendum-á-undirkaflanum-þátttakendur"
+class="section level2">
+<h2>Hvernig lýsi ég þá þátttakendum á undirkaflanum
+<strong>Þátttakendur</strong>?</h2>
+<p>Í undirkaflanum þátttakendur gæti verið hægt að tiltaka fjölda þeirra
+sem mæta viðmiðum fyrir Týpu D og fjölda þeirra sem mæta þeim ekki [t.d.
+“alls voru X sem mættu viðmiðum fyrir persónuleikaþáttinn D (X%) og X
+sem mættu ekki viðmiðum fyrir persónuleikaþáttinn D (X%)]. Slíkt myndi
+ríma við eðlilega lýsingu á þátttakendum rannsóknarinnar sem væri í
+samhengi við ykkar rannsókn. Hins vegar má einnig flokka það undir
+niðurstöður (sem sagt lýsandi tölfræði) og væri því e.t.v. eðlilegra að
+birta það í niðurstöðukaflanum.</p>
+</div>
+<div id="hvort-á-ég-að-nota-t-próf-eða-fylgnipróf"
+class="section level2">
+<h2>Hvort á ég að nota t-próf eða fylgnipróf?</h2>
+<p>Ef þið eruð með tvær samfelldar breytur, þá notið þið fylgnipróf!</p>
+<ul>
+<li>Ekki birta sömu niðurstöðurnar tvisvar sinnum (t.d. bæði t-próf og
+fylgni)<br />
+</li>
+<li>Undantekning á þessu gæti verið að skipta hópum upp eftir miðgildi á
+persónuleikaþætti.</li>
+<li>Við mælum samt ekki endilega með því þar sem það er óljóst hverju
+það bætir við að tvítaka sömu niðurstöðurnar!</li>
+</ul>
+</div>
+<div id="það-er-villa-í-rosenberg-kvarðanum" class="section level2">
+<h2>Það er villa í Rosenberg kvarðanum!</h2>
+<p>Það er villa í leiðbeiningum fyrir Rosenberg kvarðan. Í endurkóðun
+gildir eftirfarandi: Svör sem skiluðu gildinu 1 eiga að fá nýtt gildi
+sem er jafnt og 4, svör sem skiluðu gildinu 2 fá nýtt gildi sem er jafnt
+og 3, svör sem skiluðu gildinu 3 fá nýtt gildi sem er jafnt og 2, og
+loks fá svör sem skiluðu gildinu 4 nýtt gildi sem er jafnt og 1. - Rétt
+endurkóðun er sem sagt: 1=4, 2=3, 3=2 og 4=1.</p>
+</div>
+</div>
+<div id="free-rides-eru-ekki-í-boði" class="section level1">
+<h1>“Free-rides” eru ekki í boði!</h1>
+<p>Hafið í huga að allir hópameðlimir kvitta undir verkefnið í heild.
+Til dæmis myndi það skjóta skökku við ef einn hópameðlimur sjái alfarið
+um niðurstöðukaflann, annar sjái alfarið um inngangskaflann og sá þriðji
+alfarið um umræðukaflann (o.s.frv.). Hver og einn hópameðlimur á að koma
+að öllum köflunum. Þetta er vegna þess að allir hópameðlimir fá sömu
+einkunn fyrir verkefnið og þurfa því að geta staðið við þann texta sem
+er skrifaður. Að því sögðu er ekki óalgengt að fólk skipti með sér
+verkum (og raunar er það venjan). “Free-rides” eru ekki í boði!</p>
+<hr>
+<p>&#169; Jón Ingi Hlynsson - Síðasta breyting átti sér stað:
+2023-11-02</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
