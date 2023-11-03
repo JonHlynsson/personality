@@ -3,7 +3,7 @@
     "path": "~/Háskóli Íslands/Kennsla/Persónuleikasálfræði 2023/R og glærur/Personuleikakennsla 2023/personality/Samantekt-2023.Rmd",
     "project_path": "Samantekt-2023.Rmd",
     "type": "r_markdown",
-    "hash": "1944119472",
+    "hash": "3889203746",
     "contents": "",
     "dirty": false,
     "created": 1698960767399.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "176,2",
-        "scrollLine": "170"
+        "cursorPosition": "160,116",
+        "scrollLine": "146"
     },
     "folds": "",
-    "lastKnownWriteTime": 1698962929,
+    "lastKnownWriteTime": 1699012332,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1698962929,
+    "last_content_update": 1699012332063,
     "read_only": false,
     "read_only_alternatives": []
 }

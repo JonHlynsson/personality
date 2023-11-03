@@ -18,6 +18,10 @@ knitr::opts_chunk$set(echo = F)
 
 Við mælum með því að lesa þetta skjal **afar vel**. Við höfum safnað saman öllum þeim helstu upplýsingum sem við teljum að sé brýnt að ítreka fyrir skilin. **Athugið að þetta er lifandi skjal** og gæti því tekið smávægilegum breytingum eftir því sem nær dregur skilum. **Þið getið séð hvenær skjalið var síðast uppfært neðst í skjalinu**. Við höfum gengið úr skugga um að **ef einhver breyting á sér stað** þá uppfærist dagsetningin sem er neðst **sjálfkrafa**.
 
+### Alemnnar upplýsingar 
+
+Gagnasafnið ykkar inniheldur gögn frá ykkur og tveimur árgöngum á undan ykkur. Það er, gögnin spanna árin 2021-2023. 
+
 # Almenn ráð um skýrsluskrif 
 [Smelltu hér](https://docs.google.com/document/d/1wY43OLAcqSgPXThuXXPUJX7DPe4GMhSI/edit?usp=sharing&ouid=101348460249919801545&rtpof=true&sd=true) til þess að skoða ítarlegar leiðbeiningar um hvernig megi skrifa sem besta ritgerð. Ráðleggingarnar þarna má finna eiga við fleiri kúrsa en Persónuleikasálfræði og væri gagnlegt fyrir ykkur að lesa! 
 
@@ -36,7 +40,7 @@ Hér má sjá fyrirlestur (á ensku) um hvers vegna ritun og textasmíði eru mi
 
 Hér má sjá mynd sem sýnir dæmigerðar leiðbeiningar um skýrsluskrif.
 
-```{r, out.width="40%"}
+```{r, out.width="10%"}
 knitr::include_graphics("images/flow.png")
 ```
 
@@ -56,6 +60,9 @@ Til aukreitis við **Orðgnótt**, þá mælum við með [íðorðabankanum](htt
 
 ### Tilgáturnar
 Mikilvægt að rökstyðja tilgáturnar ykkar – af hverju haldið það að X sé að fara gerast? – stundum er gott að hugsa um rassálfana úr *Ronju ræningjadóttur*.
+
+## Ráðleggingar fyrir **aðferð**
+
 ### Ráðleggingar fyrir **mælitæki**
 Lýsa öllum þeim mælitækjum sem voru notuð. Þar á meðal skal tiltaka skorun breyta, heildarskor, spönn, innri áreiðanleika og svo framvegis.
 
@@ -67,7 +74,7 @@ Munið að í öllum nemendaverkefnum er ykkar hlutverk að sannfæra kennarann 
 
 Það getur því verið gagnlegt að ímynda sér að sá sem les yfir haldi að þið vitið ekki hvað þið eruð að tala um og að ykkar hlutverk sé að sannfæra yfirlesarann um að það sé rangt. 
 
-### Ráðleggingar fyrir **niðurstöður**
+## Ráðleggingar fyrir **niðurstöður**
 
 [Smelltu hér](https://apastyle.apa.org/style-grammar-guidelines/tables-figures) til þess að skoða leiðbeiningar um hvernig skuli birta töflur og myndir.
 
@@ -129,7 +136,7 @@ Hér má sjá gamalt vídjó sem þar sem ég útlista hvernig skuli bera sig a�
 <iframe width="600" height="350" src="https://www.youtube.com/embed/W7C9ClN4wyc" title="Íslenskar APA reglur og t-próf í SPSS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### Akademísk textasmíði 
-Passið samræmi í setningaskipan og **ekki gleyma rauða þræðinum**. Þið getið hugsað skrif sem þessi á eftirfarandi máta:
+Passið samræmi í setningaskipan og **ekki gleyma rauða þræðinum**. Þið getið hugsað skrif sem þessi á eftirfarandi máta:  
 - Hvert og eitt orð í setningu á að vera í röklegu samhengi við setninguna í heild og koma heim og saman við þema setningarinnar.
 - Hver og ein setning í efnisgrein á að vera í röklegu samhengi við aðrar setningar í efnisgreininni og koma heim og saman við þemað í efnisgreininni í heild sem og undirkaflann sem hún tilheyrir.
 	- Reglan með fjölda orða í efnisgreinum er að efnisgrein skal innihalda 145 orð ± 15 orð.
@@ -148,6 +155,10 @@ Eitt sinn var kennari við deildina sem rammaði inn rauðan þráð úr garni o
 
 Að endurskrifa texta er eitt af því sem einkennir nemendur sem fá háa einkunn.
 
+
+### Námskeið í textamíði 
+
+Jónas Kristjánsson (2023) hefur gert námskeið í textasmíði aðgengilegt öllum. Þar má finna ýmis góð og gagnleg ráð. [Smelltu hér](http://www.jonas.is/namskeid/) til þess að skoða það.
 
 ### Gagnrýni í textasmíði  
 Ekki bara lýsa rannsóknum og niðurstöðum þeirra í inngagni. Samþættið niðurstöður margra rannsókna í stað þess að telja upp rannsóknir. 
