@@ -18,9 +18,13 @@ knitr::opts_chunk$set(echo = F)
 
 Við mælum með því að lesa þetta skjal **afar vel**. Við höfum safnað saman öllum þeim helstu upplýsingum sem við teljum að sé brýnt að ítreka fyrir skilin. **Athugið að þetta er lifandi skjal** og gæti því tekið smávægilegum breytingum eftir því sem nær dregur skilum. **Þið getið séð hvenær skjalið var síðast uppfært neðst í skjalinu**. Við höfum gengið úr skugga um að **ef einhver breyting á sér stað** þá uppfærist dagsetningin sem er neðst **sjálfkrafa**.
 
-### Alemnnar upplýsingar 
+### Almennar upplýsingar 
 
 Gagnasafnið ykkar inniheldur gögn frá ykkur og tveimur árgöngum á undan ykkur. Það er, gögnin spanna árin 2021-2023. 
+
+#### **Ekki gleyma að keyra textann ykkar í gegnum villupúka!**
+
+ 
 
 # Almenn ráð um skýrsluskrif 
 [Smelltu hér](https://docs.google.com/document/d/1wY43OLAcqSgPXThuXXPUJX7DPe4GMhSI/edit?usp=sharing&ouid=101348460249919801545&rtpof=true&sd=true) til þess að skoða ítarlegar leiðbeiningar um hvernig megi skrifa sem besta ritgerð. Ráðleggingarnar þarna má finna eiga við fleiri kúrsa en Persónuleikasálfræði og væri gagnlegt fyrir ykkur að lesa! 
